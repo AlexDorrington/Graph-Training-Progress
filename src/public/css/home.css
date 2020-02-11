@@ -1,0 +1,58 @@
+body {
+    width: 100%;
+    height: 100vh;
+    box-sizing: border-box;
+    background-color: #000;
+    background-image: url(/img/home.jpg);
+    background-position: bottom;
+    overflow: hidden;
+}
+.flip-card {
+    box-shadow: inset 0 0 0 1000px rgba(0,0,0,.39);
+    width: 30%;
+    height: 80%;
+    border-width: 3px !important;
+    border-color: #ff6600 !important;
+    perspective: 1000px;
+    background-color: #f2f2f207;
+}
+#flip-card-inner {
+    transition: transform 1s;
+    transform-style: preserve-3d;
+    position: relative; width: 100%;
+    height: 100%;
+    background-color: #f2f2f207;
+    border-color: #ff6600 !important;
+}
+#flip-card-front {
+    backface-visibility: hidden;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+#flip-card-back {
+    transform: rotateY(180deg);
+    backface-visibility: hidden;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+.flipRegister {
+    transform: rotateY(180deg);
+}
+.displayRegister {
+    display: none;
+}
+.fa-dumbbell {
+    color: #ff6600c7;
+}
+.flipLink, .flipLink:hover {
+    color: #ff6600;
+}
+label, input {
+    color: #ff6600;
+}
+button {
+    background-color: #ff6600;
+    color: #f2f2f2;
+}
