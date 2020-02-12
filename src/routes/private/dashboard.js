@@ -20,7 +20,7 @@ router.get('/weight', (req, res, next) => {
         fs.readFile(weightData, async (err, data) => {
             if (err) {
                 console.log('No file found')
-                return res.status(400).json([])
+                return res.json([])
             }
             const fileData = await JSON.parse(data)
             const userData = await fileData.filter((data) => {
