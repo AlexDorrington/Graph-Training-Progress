@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/dashboard.css">
     <title>Dashboard</title>
 </head>
 <body>
@@ -19,6 +20,10 @@
             </div>
         </div>
     </nav>
+
+    <!-- RENDERED WEIGHT DATA BLOCKS -->
+    <div class="d-flex justify-content-start" style="width: 90vw; height: 30vh; margin: auto; flex-wrap: wrap; overflow-x: auto;" id="dataContainer">
+    </div>
 
     <!--MODALS-->
     <div class="modal fade" id="weightModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="position: relative; top: 5vh">
