@@ -1,4 +1,6 @@
 const dataBlocksContainer = document.getElementById('dataContainer')
+let weightData;
+let user;
 
 
 //FETCH WEIGHT DATA
@@ -7,6 +9,8 @@ const fetchWeightData = async () => {
         method: 'GET'
     })
     const jsonData = await data.json()
+    weightData = jsonData
+    user = weightData[0].user
     renderWeightData(jsonData)
 }
 fetchWeightData()
@@ -17,11 +21,14 @@ const renderWeightData = (weightDataArr) => {
     for (let weight of weightDataArr) {
         const contentBody = document.createElement('span')
         contentBody.innerHTML = `
-        <div class="card text-center" style="width: 15vw; height: 10vh; margin: 2px; padding: 2px; flex-direction: column;">
+        <div class="card text-center" style="width: 15.5vw; height: 15vh; margin: 2px; padding: 2px; flex-direction: column;">
             <div>
               <h5 class="card-title">${weight.date}</h5>
               <a href="#" class="card-link">Weight: ${weight.weight} ${weight.measure}</a>
               <a href="#" class="card-link">Bodyfat: ${weight.bodyfat}%</a>
+              <div>
+                    <button class="btn btn-primary" style="margin: 0 5px">Edit</button><button class="btn btn-danger" style="margin: 0 5px">Delete</button>
+              </div>
             </div>
         </div>`
         dataBlocksContainer.appendChild(contentBody)
@@ -55,6 +62,7 @@ weightForm.addEventListener('submit', async (e) => {
     const weight = weightInput.value
     const bodyfat = bodyfatInput.value
     const date = dateInput.value
+    const dataID = Date.now()
     await fetch('http://localhost:3000/dashboard/weight', {
         method: 'POST',
         headers: {
@@ -64,21 +72,34 @@ weightForm.addEventListener('submit', async (e) => {
             weight,
             measure: btn,
             bodyfat,
-            date
+            date,
+            dataID
         })
     })
-    renderNewWeight(weight, bodyfat, date, btn)
+    weightData.push({
+        weight,
+        measure: btn,
+        bodyfat,
+        date,
+        id: dataID,
+        user
+    })
+    renderNewWeight(weight, bodyfat, date, dataID, btn)
 })
 
+
 //RENDER NEWLY ADDED WEIGHT TO HTML
-const renderNewWeight = (weight, bodyfat, date, lbs) => {
+const renderNewWeight = (weight, bodyfat, date, id, lbs) => {
     const contentBody = document.createElement('span')
     contentBody.innerHTML = `
-    <div class="card text-center" style="width: 15vw; height: 10vh; margin: 2px; padding: 2px; flex-direction: column;">
+    <div class="card text-center" id="${id}" style="width: 15.5vw; height: 15vh; margin: 2px; padding: 2px; flex-direction: column;">
         <div>
             <h5 class="card-title">${date}</h5>
             <a href="#" class="card-link">Weight: ${weight} ${lbs}</a>
             <a href="#" class="card-link">Bodyfat: ${bodyfat}%</a>
+            <div>
+                <button class="btn btn-primary" style="margin: 0 5px">Edit</button><button class="btn btn-danger" style="margin: 0 5px">Delete</button>
+            </div>
         </div>
     </div>`
     dataBlocksContainer.appendChild(contentBody)

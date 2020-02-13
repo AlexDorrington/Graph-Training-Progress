@@ -6,5 +6,7 @@ Passport for auth
 bootstrap
 
 Todo next:
+ - Add loading gif when fetching data
+ - Remove model on post request
  - Handle repeat post request for same date (override intial object)
- - Render data to frontend
+ - Create patch and delete routes
