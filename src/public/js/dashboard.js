@@ -2,6 +2,7 @@ const dataBlocksContainer = document.getElementById('dataContainer')
 const closeModalBtn = document.getElementById('closeModal')
 const loadingSpinner = document.getElementById('contentAddedSpinner')
 const dataAddedTip = document.getElementById('contentAddTip')
+const dataMatchTip = document.getElementById('contentMatchTip')
 let weightData;
 let user;
 
@@ -9,6 +10,7 @@ let user;
 
 closeModalBtn.addEventListener('click', () => {
     dataAddedTip.style.display = 'none'
+    dataMatchTip.style.display = 'none'
 })
 
 
@@ -30,15 +32,14 @@ const renderWeightData = (weightDataArr) => {
     for (let weight of weightDataArr) {
         const contentBody = document.createElement('span')
         contentBody.innerHTML = `
-        <div class="card text-center" id="${weight.dataID}" style="width: 15.5vw; height: 15vh; margin: 2px; padding: 2px; flex-direction: column;">
+        <div class="card text-center" id="${weight.dataID}" style="color: #ff6600;background-color: #343a40ab; width: 15.5vw; height: 15vh; margin: 2px; padding: 2px; flex-direction: column;">
             <div>
                 <h5 class="card-title">${weight.date}</h5>
-                <a href="#" class="card-link">Weight: ${weight.weight} ${weight.measure}</a>
-                <a href="#" class="card-link">Bodyfat: ${weight.bodyfat}%</a>
-                <div>
+                <a style="color: #ff6600" href="#" class="card-link">Weight: ${weight.weight} ${weight.measure}</a>
+                <a style="color: #ff6600" href="#" class="card-link">Bodyfat: ${weight.bodyfat}%</a>
+                </br>
                     <button class="btn btn-primary" style="margin: 0 5px">Edit</button><button class="btn btn-danger" style="margin: 0 5px">Delete</button>
-                </div>
-            </div>
+            </>
         </div>`
         dataBlocksContainer.appendChild(contentBody)
     }
@@ -72,6 +73,10 @@ weightForm.addEventListener('submit', async (e) => {
     const bodyfat = bodyfatInput.value
     const date = dateInput.value
     const dataID = Date.now()
+    const dateMatch = await checkDateExists(date)
+    if (dateMatch) {
+        return dataMatchTip.style.display = 'block'
+    }
     await fetch('http://localhost:3000/dashboard/weight', {
         method: 'POST',
         headers: {
@@ -97,19 +102,26 @@ weightForm.addEventListener('submit', async (e) => {
     loadingSpinner.style.display = 'block'
 })
 
+//CHECK IF POST DATE ALREADY EXISTS
+const checkDateExists = async (date) => {
+    const foundMatch = await weightData.find((item) => {
+        return item.date == date
+    })
+    return (foundMatch)
+}
+
 
 //RENDER NEWLY ADDED WEIGHT TO HTML
 const renderNewWeight = (weight, bodyfat, date, id, lbs) => {
     const contentBody = document.createElement('span')
     contentBody.innerHTML = `
-    <div class="card text-center" id="${id}" style="width: 15.5vw; height: 15vh; margin: 2px; padding: 2px; flex-direction: column;">
+    <div class="card text-center" id="${id}" style="color: #ff6600; background-color: #343a40ab; width: 15.5vw; height: 15vh; margin: 2px; padding: 2px; flex-direction: column;">
         <div>
             <h5 class="card-title">${date}</h5>
-            <a href="#" class="card-link">Weight: ${weight} ${lbs}</a>
-            <a href="#" class="card-link">Bodyfat: ${bodyfat}%</a>
-            <div>
+            <a style="color: #ff6600" href="#" class="card-link">Weight: ${weight} ${lbs}</a>
+            <a style="color: #ff6600" href="#" class="card-link">Bodyfat: ${bodyfat}%</a>
+            </br>
                 <button class="btn btn-primary" style="margin: 0 5px">Edit</button><button class="btn btn-danger" style="margin: 0 5px">Delete</button>
-            </div>
         </div>
     </div>`
     dataBlocksContainer.appendChild(contentBody)
