@@ -60,6 +60,36 @@ router.post('/weight', ensureAuth, (req, res, next) => {
 })
 
 
+//EDIT EXISTING BODY WEIGHT DATA BY ID
+router.patch('/weight/:id', (req, res, next) => {
+
+})
+
+
+//DELETE EXISTING BODY WEIGHT DATA BY ID
+router.delete('/weight/:id', async(req, res, next) => {
+    const deleteID = req.body.dataID
+    
+    try {
+        fs.readFile(weightData, async (err, data) => {
+            if (err) {
+                return console.log('No file found')
+            }
+            const fileData = await JSON.parse(data)
+            const valInArray = await fileData.findIndex((item) => {
+                return item.dataID == deleteID
+            })
+            await fileData.splice(valInArray, 1)
+            fs.writeFile(weightData, JSON.stringify(fileData), () => {
+                console.log('Weight data deleted')
+            })
+        })
+    } catch (err) {
+        console.log(err)
+    }
+})
+
+
 
 module.exports = {
     authorisedRoutes: router

@@ -23,6 +23,7 @@ const fetchWeightData = async () => {
     weightData = jsonData
     user = weightData[0].user
     renderWeightData(jsonData)
+    getDeleteBtns()
 }
 fetchWeightData()
 
@@ -38,7 +39,8 @@ const renderWeightData = (weightDataArr) => {
                 <a style="color: #ff6600" href="#" class="card-link">Weight: ${weight.weight} ${weight.measure}</a>
                 <a style="color: #ff6600" href="#" class="card-link">Bodyfat: ${weight.bodyfat}%</a>
                 </br>
-                    <button class="btn btn-primary" style="margin: 0 5px">Edit</button><button class="btn btn-danger" style="margin: 0 5px">Delete</button>
+                    <button class="btn btn-primary" style="margin: 0 5px">Edit</button>
+                    <button class="btn btn-danger deleteBtn" id="${weight.dataID}" style="margin: 0 5px">Delete</button>
             </>
         </div>`
         dataBlocksContainer.appendChild(contentBody)
@@ -104,7 +106,7 @@ weightForm.addEventListener('submit', async (e) => {
 
 //CHECK IF POST DATE ALREADY EXISTS
 const checkDateExists = async (date) => {
-    const foundMatch = await weightData.find((item) => {
+    const foundMatch = await weightData.find(item => {
         return item.date == date
     })
     return (foundMatch)
@@ -121,7 +123,8 @@ const renderNewWeight = (weight, bodyfat, date, id, lbs) => {
             <a style="color: #ff6600" href="#" class="card-link">Weight: ${weight} ${lbs}</a>
             <a style="color: #ff6600" href="#" class="card-link">Bodyfat: ${bodyfat}%</a>
             </br>
-                <button class="btn btn-primary" style="margin: 0 5px">Edit</button><button class="btn btn-danger" style="margin: 0 5px">Delete</button>
+                <button class="btn btn-primary" style="margin: 0 5px">Edit</button>
+                <button class="btn btn-danger deleteBtn" id="${id}" style="margin: 0 5px">Delete</button>
         </div>
     </div>`
     dataBlocksContainer.appendChild(contentBody)
@@ -129,6 +132,7 @@ const renderNewWeight = (weight, bodyfat, date, id, lbs) => {
         loadingSpinner.style.display = 'none'
         dataAddedTip.style.display = 'block'
     }, 750)
+    getDeleteBtns()
 }
 
 
@@ -136,3 +140,28 @@ const renderNewWeight = (weight, bodyfat, date, id, lbs) => {
 
 
 //DELETE EXISTING WEIGHT DATA
+let getDeleteBtns = () => {
+    const deleteBtns = document.querySelectorAll('.deleteBtn')
+    deleteBtnArray = Array.from(deleteBtns)
+    deleteBtnArray.forEach((btn) => {
+        btn.addEventListener('click', deleteItem)
+    })
+}
+
+const deleteItem = async (e) => {
+    const confirmDelete = confirm('Would you like to delete this item?')
+    if (!confirmDelete) {
+        return
+    }
+    fetch(`http://localhost:3000/dashboard/weight/${e.target.id}`, {
+        method: 'delete',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            dataID: e.target.id
+        })
+    })
+    e.target.offsetParent.style.display = 'none'
+    weightData.length = 0
+}
