@@ -1,6 +1,15 @@
 const dataBlocksContainer = document.getElementById('dataContainer')
+const closeModalBtn = document.getElementById('closeModal')
+const loadingSpinner = document.getElementById('contentAddedSpinner')
+const dataAddedTip = document.getElementById('contentAddTip')
 let weightData;
 let user;
+
+
+
+closeModalBtn.addEventListener('click', () => {
+    dataAddedTip.style.display = 'none'
+})
 
 
 //FETCH WEIGHT DATA
@@ -21,14 +30,14 @@ const renderWeightData = (weightDataArr) => {
     for (let weight of weightDataArr) {
         const contentBody = document.createElement('span')
         contentBody.innerHTML = `
-        <div class="card text-center" style="width: 15.5vw; height: 15vh; margin: 2px; padding: 2px; flex-direction: column;">
+        <div class="card text-center" id="${weight.dataID}" style="width: 15.5vw; height: 15vh; margin: 2px; padding: 2px; flex-direction: column;">
             <div>
-              <h5 class="card-title">${weight.date}</h5>
-              <a href="#" class="card-link">Weight: ${weight.weight} ${weight.measure}</a>
-              <a href="#" class="card-link">Bodyfat: ${weight.bodyfat}%</a>
-              <div>
+                <h5 class="card-title">${weight.date}</h5>
+                <a href="#" class="card-link">Weight: ${weight.weight} ${weight.measure}</a>
+                <a href="#" class="card-link">Bodyfat: ${weight.bodyfat}%</a>
+                <div>
                     <button class="btn btn-primary" style="margin: 0 5px">Edit</button><button class="btn btn-danger" style="margin: 0 5px">Delete</button>
-              </div>
+                </div>
             </div>
         </div>`
         dataBlocksContainer.appendChild(contentBody)
@@ -85,6 +94,7 @@ weightForm.addEventListener('submit', async (e) => {
         user
     })
     renderNewWeight(weight, bodyfat, date, dataID, btn)
+    loadingSpinner.style.display = 'block'
 })
 
 
@@ -103,4 +113,14 @@ const renderNewWeight = (weight, bodyfat, date, id, lbs) => {
         </div>
     </div>`
     dataBlocksContainer.appendChild(contentBody)
+    setTimeout(() => {
+        loadingSpinner.style.display = 'none'
+        dataAddedTip.style.display = 'block'
+    }, 750)
 }
+
+
+//EDIT EXISTING WEIGHT DATA
+
+
+//DELETE EXISTING WEIGHT DATA
