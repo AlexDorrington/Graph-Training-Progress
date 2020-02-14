@@ -3,11 +3,19 @@ const closeModalBtn = document.getElementById('closeModal')
 const loadingSpinner = document.getElementById('contentAddedSpinner')
 const dataAddedTip = document.getElementById('contentAddTip')
 const dataMatchTip = document.getElementById('contentMatchTip')
+const filterBox = document.querySelector('.filterBox')
+const slideFilterBox = document.getElementById('moveFilterBox')
 let weightData;
 let user;
 
 
+//MOVE FILTER BOX
+slideFilterBox.addEventListener('click', () => {
+    filterBox.classList.toggle('animateFilterBox')
+})
 
+
+//CLOSE MODAL
 closeModalBtn.addEventListener('click', () => {
     dataAddedTip.style.display = 'none'
     dataMatchTip.style.display = 'none'
@@ -23,6 +31,7 @@ const fetchWeightData = async () => {
     weightData = jsonData
     user = weightData[0].user
     renderWeightData(jsonData)
+    getEditBtns()
     getDeleteBtns()
 }
 fetchWeightData()
@@ -33,14 +42,14 @@ const renderWeightData = (weightDataArr) => {
     for (let weight of weightDataArr) {
         const contentBody = document.createElement('span')
         contentBody.innerHTML = `
-        <div class="card text-center" id="${weight.dataID}" style="color: #ff6600;background-color: #343a40ab; width: 15.5vw; height: 15vh; margin: 2px; padding: 2px; flex-direction: column;">
+        <div class="card text-center" id="${weight.dataID}" style="color: #ff6600;background-color: #343a40ab; max-width: 15.5vw; max-height: 14vh; margin: 2px; padding: 2px; flex-direction: column;">
             <div>
                 <h5 class="card-title">${weight.date}</h5>
                 <a style="color: #ff6600" href="#" class="card-link">Weight: ${weight.weight} ${weight.measure}</a>
                 <a style="color: #ff6600" href="#" class="card-link">Bodyfat: ${weight.bodyfat}%</a>
                 </br>
-                    <button class="btn btn-primary" style="margin: 0 5px">Edit</button>
-                    <button class="btn btn-danger deleteBtn" id="${weight.dataID}" style="margin: 0 5px">Delete</button>
+                    <button class="btn btn-primary editBtn" id="${weight.dataID}" style="margin: 2px 5px 0">Edit</button>
+                    <button class="btn btn-danger deleteBtn" id="${weight.dataID}" style="margin: 2px 5px 0">Delete</button>
             </>
         </div>`
         dataBlocksContainer.appendChild(contentBody)
@@ -117,14 +126,14 @@ const checkDateExists = async (date) => {
 const renderNewWeight = (weight, bodyfat, date, id, lbs) => {
     const contentBody = document.createElement('span')
     contentBody.innerHTML = `
-    <div class="card text-center" id="${id}" style="color: #ff6600; background-color: #343a40ab; width: 15.5vw; height: 15vh; margin: 2px; padding: 2px; flex-direction: column;">
+    <div class="card text-center" id="${id}" style="color: #ff6600; background-color: #343a40ab; max-width: 15.5vw; max-height: 14vh; margin: 2px; padding: 2px; flex-direction: column;">
         <div>
             <h5 class="card-title">${date}</h5>
             <a style="color: #ff6600" href="#" class="card-link">Weight: ${weight} ${lbs}</a>
             <a style="color: #ff6600" href="#" class="card-link">Bodyfat: ${bodyfat}%</a>
             </br>
-                <button class="btn btn-primary" style="margin: 0 5px">Edit</button>
-                <button class="btn btn-danger deleteBtn" id="${id}" style="margin: 0 5px">Delete</button>
+                <button class="btn btn-primary editBtn" id="${id}" style="margin: 2px 5px 0">Edit</button>
+                <button class="btn btn-danger deleteBtn" id="${id}" style="margin: 2px 5px 0">Delete</button>
         </div>
     </div>`
     dataBlocksContainer.appendChild(contentBody)
@@ -132,18 +141,30 @@ const renderNewWeight = (weight, bodyfat, date, id, lbs) => {
         loadingSpinner.style.display = 'none'
         dataAddedTip.style.display = 'block'
     }, 750)
+    getEditBtns()
     getDeleteBtns()
 }
 
 
 //EDIT EXISTING WEIGHT DATA
+const getEditBtns = () => {
+    const editBtns = document.querySelectorAll('.editBtn')
+    editBtnArray = Array.from(editBtns)
+    editBtnArray.forEach(btn => {
+        btn.addEventListener('click', editItem)
+    })
+}
+
+const editItem = async (e) => {
+    console.log(e.target.id)
+}
 
 
 //DELETE EXISTING WEIGHT DATA
-let getDeleteBtns = () => {
+const getDeleteBtns = () => {
     const deleteBtns = document.querySelectorAll('.deleteBtn')
     deleteBtnArray = Array.from(deleteBtns)
-    deleteBtnArray.forEach((btn) => {
+    deleteBtnArray.forEach(btn => {
         btn.addEventListener('click', deleteItem)
     })
 }

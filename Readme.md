@@ -6,5 +6,9 @@ Passport for auth
 bootstrap
 
 Todo next:
- - Create patch and delete routes
+ - Create patch route
  - Tidy markup
+ - Impliment chart.js
+
+ Expansion:
+ - Add exercises feature as well

@@ -8,3 +8,7 @@ body {
     background-size: cover;
     overflow: hidden;
 }
+.animateFilterBox {
+    transform: translateX(17vw);
+    transition-duration: 1.5s;
+}
