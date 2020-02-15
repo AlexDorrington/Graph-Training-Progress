@@ -61,8 +61,30 @@ router.post('/weight', ensureAuth, (req, res, next) => {
 
 
 //EDIT EXISTING BODY WEIGHT DATA BY ID
-router.patch('/weight/:id', (req, res, next) => {
-    console.log(req.params.id)
+router.patch('/weight/:id', async (req, res, next) => {
+    const ID = req.params.id
+    const {newWeight, newBodyfat} = req.body
+    
+    try {
+        fs.readFile(weightData, async (err, data) => {
+            if (err) {
+                return console.log('No file found')
+            }
+            const fileData = await JSON.parse(data)
+            const valInArray = await fileData.findIndex((item) => {
+                return item.dataID == ID
+            })
+            const newEntry = fileData[valInArray]
+            newEntry.weight = newWeight
+            newEntry.bodyfat = newBodyfat
+            await fileData.splice(valInArray, 1, newEntry)
+            fs.writeFile(weightData, JSON.stringify(fileData), () => {
+                console.log('Weight data edited')
+            })
+        })
+    } catch (err) {
+        console.log(err)
+    }
 })
 
 

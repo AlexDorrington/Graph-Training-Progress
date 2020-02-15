@@ -147,30 +147,39 @@ const renderNewWeight = (weight, bodyfat, date, id, lbs) => {
 
 
 //EDIT EXISTING WEIGHT DATA
-// const getEditBtns = () => {
-//     const editBtns = document.querySelectorAll('.editBtn')
-//     editBtnArray = Array.from(editBtns)
-//     editBtnArray.forEach(btn => {
-//         btn.addEventListener('click', editItem)
-//     })
-// }
+const editDiv = document.getElementById('editDiv')
+const editWeightForm = document.getElementById('editWeightForm')
+const getEditBtns = () => {
+    const editBtns = document.querySelectorAll('.editBtn')
+    editBtnArray = Array.from(editBtns)
+    editBtnArray.forEach(btn => {
+        btn.addEventListener('click', editItem)
+    })
+}
 
-// const editItem = async (e) => {
-//     const dataID = e.target.id
-//     document.getElementById('editDiv').style.display = 'block'
-//     document.getElementById('editWeightForm').addEventListener('submit', (e) => {
-//         e.preventDefault()
-//         fetch(`http://localhost:3000/dashboard/weight/${dataID}`, {
-//             method: 'PATCH',
-//             headers: {
-//                 'Content-Type': 'application/json'
-//             },
-//             body: JSON.stringify({
-//                 name: 7
-//             })
-//         })
-//     }) 
-// }
+const editItem = async (e) => {
+    const dataID = e.target.id
+    editDiv.style.display = 'block'
+    editWeightForm.addEventListener('submit', async (e) => {
+        e.preventDefault()
+        fetch(`http://localhost:3000/dashboard/weight/${dataID}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                newWeight: document.getElementById('newWeightInput').value,
+                newBodyfat: document.getElementById('newBodyfatInput').value
+            })
+        })
+        weightData.length = 0
+        editDiv.style.display = 'none'
+        dataBlocksContainer.innerHTML = ''
+        fetchWeightData()
+    }, {
+        once: true
+    })
+}
 
 
 //DELETE EXISTING WEIGHT DATA
