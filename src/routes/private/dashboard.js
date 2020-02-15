@@ -62,7 +62,7 @@ router.post('/weight', ensureAuth, (req, res, next) => {
 
 //EDIT EXISTING BODY WEIGHT DATA BY ID
 router.patch('/weight/:id', (req, res, next) => {
-
+    console.log(req.params.id)
 })
 
 

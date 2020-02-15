@@ -147,17 +147,30 @@ const renderNewWeight = (weight, bodyfat, date, id, lbs) => {
 
 
 //EDIT EXISTING WEIGHT DATA
-const getEditBtns = () => {
-    const editBtns = document.querySelectorAll('.editBtn')
-    editBtnArray = Array.from(editBtns)
-    editBtnArray.forEach(btn => {
-        btn.addEventListener('click', editItem)
-    })
-}
+// const getEditBtns = () => {
+//     const editBtns = document.querySelectorAll('.editBtn')
+//     editBtnArray = Array.from(editBtns)
+//     editBtnArray.forEach(btn => {
+//         btn.addEventListener('click', editItem)
+//     })
+// }
 
-const editItem = async (e) => {
-    console.log(e.target.id)
-}
+// const editItem = async (e) => {
+//     const dataID = e.target.id
+//     document.getElementById('editDiv').style.display = 'block'
+//     document.getElementById('editWeightForm').addEventListener('submit', (e) => {
+//         e.preventDefault()
+//         fetch(`http://localhost:3000/dashboard/weight/${dataID}`, {
+//             method: 'PATCH',
+//             headers: {
+//                 'Content-Type': 'application/json'
+//             },
+//             body: JSON.stringify({
+//                 name: 7
+//             })
+//         })
+//     }) 
+// }
 
 
 //DELETE EXISTING WEIGHT DATA
