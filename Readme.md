@@ -6,7 +6,7 @@ Passport for auth
 bootstrap
 
 Todo next:
- - Create patch route
+ - Make form inputs required
  - Tidy markup
  - Impliment chart.js
 

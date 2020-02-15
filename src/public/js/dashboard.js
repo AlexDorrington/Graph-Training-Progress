@@ -1,25 +1,8 @@
 const dataBlocksContainer = document.getElementById('dataContainer')
-const closeModalBtn = document.getElementById('closeModal')
 const loadingSpinner = document.getElementById('contentAddedSpinner')
-const dataAddedTip = document.getElementById('contentAddTip')
-const dataMatchTip = document.getElementById('contentMatchTip')
-const filterBox = document.querySelector('.filterBox')
-const slideFilterBox = document.getElementById('moveFilterBox')
 let weightData;
 let user;
 
-
-//MOVE FILTER BOX
-slideFilterBox.addEventListener('click', () => {
-    filterBox.classList.toggle('animateFilterBox')
-})
-
-
-//CLOSE MODAL
-closeModalBtn.addEventListener('click', () => {
-    dataAddedTip.style.display = 'none'
-    dataMatchTip.style.display = 'none'
-})
 
 
 //FETCH WEIGHT DATA
@@ -149,6 +132,9 @@ const renderNewWeight = (weight, bodyfat, date, id, lbs) => {
 //EDIT EXISTING WEIGHT DATA
 const editDiv = document.getElementById('editDiv')
 const editWeightForm = document.getElementById('editWeightForm')
+const newWeightInput = document.getElementById('newWeightInput')
+const newBodyfatInput = document.getElementById('newBodyfatInput')
+
 const getEditBtns = () => {
     const editBtns = document.querySelectorAll('.editBtn')
     editBtnArray = Array.from(editBtns)
@@ -156,7 +142,7 @@ const getEditBtns = () => {
         btn.addEventListener('click', editItem)
     })
 }
-
+const contentEditSpinner = document.getElementById('contentEditSpinner')
 const editItem = async (e) => {
     const dataID = e.target.id
     editDiv.style.display = 'block'
@@ -168,14 +154,18 @@ const editItem = async (e) => {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                newWeight: document.getElementById('newWeightInput').value,
-                newBodyfat: document.getElementById('newBodyfatInput').value
+                newWeight: newWeightInput.value,
+                newBodyfat: newBodyfatInput.value
             })
         })
         weightData.length = 0
         editDiv.style.display = 'none'
         dataBlocksContainer.innerHTML = ''
-        fetchWeightData()
+        contentEditSpinner.style.display = 'block'
+        setTimeout(() => {
+            contentEditSpinner.style.display = 'none'
+            fetchWeightData()
+        }, 1750)
     }, {
         once: true
     })
