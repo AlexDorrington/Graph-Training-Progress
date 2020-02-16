@@ -33,6 +33,7 @@ radioBtnArray.forEach(btn => {
 const filterSubmitBtn = document.getElementById('submitFilter')
 
 filterSubmitBtn.addEventListener('click', async () => {
+    const dataBlocks = Array.from(document.querySelectorAll('.card'))
     const filterPhrase = document.getElementById('filterInput').value
     let filterBy;
     radioBtnArray.forEach((btn) => {
@@ -43,7 +44,12 @@ filterSubmitBtn.addEventListener('click', async () => {
     const filterResults = await weightData
     .map(item => item[filterBy] == filterPhrase ? item.dataID : false)
     .filter(item => item)
-    console.log(filterResults)
+    dataBlocks.findIndex(block => {
+        block.id
+    })
+    dataBlocks.filter((block) => !filterResults
+    .includes(parseInt(block.id)))
+    .forEach(block => block.style.display = 'none');
 })
 
 
