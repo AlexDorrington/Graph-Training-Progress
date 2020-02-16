@@ -6,6 +6,7 @@ Passport for auth
 bootstrap
 
 Todo next:
+ - Apply visual to filtered blocks
  - Make form inputs required
  - Tidy markup
  - Impliment chart.js

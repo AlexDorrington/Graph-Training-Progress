@@ -32,17 +32,18 @@ radioBtnArray.forEach(btn => {
 //SUBMIT FILTER
 const filterSubmitBtn = document.getElementById('submitFilter')
 
-filterSubmitBtn.addEventListener('click', () => {
+filterSubmitBtn.addEventListener('click', async () => {
+    const filterPhrase = document.getElementById('filterInput').value
     let filterBy;
     radioBtnArray.forEach((btn) => {
         if (btn.checked) {
             filterBy = btn.value
         }
     })
-    const test = weightData.filter((item) => {
-        return item[filterBy] == 171
-    })
-    console.log(test)
+    const filterResults = await weightData
+    .map(item => item[filterBy] == filterPhrase ? item.dataID : false)
+    .filter(item => item)
+    console.log(filterResults)
 })
 
 
