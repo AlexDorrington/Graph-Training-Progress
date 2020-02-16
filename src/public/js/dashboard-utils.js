@@ -29,7 +29,7 @@ radioBtnArray.forEach(btn => {
 })
 
 
-//SUBMIT FILTER
+//FILTER DATA BLOCKS
 const filterSubmitBtn = document.getElementById('submitFilter')
 
 filterSubmitBtn.addEventListener('click', async () => {
@@ -50,6 +50,21 @@ filterSubmitBtn.addEventListener('click', async () => {
     dataBlocks.filter((block) => !filterResults
     .includes(parseInt(block.id)))
     .forEach(block => block.style.display = 'none');
+})
+
+
+//RESET FILTER
+const filterResetBtn = document.getElementById('resetFilter')
+
+filterResetBtn.addEventListener('click', () => {
+    weightData.length = 0
+        editDiv.style.display = 'none'
+        dataBlocksContainer.innerHTML = ''
+        contentEditSpinner.style.display = 'block'
+        setTimeout(() => {
+            contentEditSpinner.style.display = 'none'
+            fetchWeightData()
+        }, 1750)
 })
 
 

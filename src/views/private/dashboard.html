@@ -22,13 +22,13 @@
     </nav>
 
     <!--EDIT DATA BLOCK CONTENT-->
-    <div id="editDiv" style="width: 50vw; height: 5vh; border: 1px solid black; margin: auto; display: none;">
-        <form action="/dashboard/weight/:id" id="editWeightForm">
-            <label for="newWeight">New weight</label>
-            <input type="text" name="newWeight" id="newWeightInput">
-            <label for="newbodyfat">New Bodyfat</label>
-            <input type="text" name="newBodyfat" id="newBodyfatInput">
-            <button type="submit">Confirm</button>
+    <div id="editDiv" style="width: 50vw; height: 5vh; border: 1px solid black; margin: auto; display: none; padding: 5px;">
+        <form action="/dashboard/weight/:id" id="editWeightForm" style="height: 100%;" class="d-flex justify-content-center align-middle">
+            <label for="newWeight" class="mr-1">New weight</label>
+            <input type="text" name="newWeight" id="newWeightInput" placeholder="New weight...">
+            <label class="ml-3 mr-1" for="newbodyfat">New Bodyfat</label>
+            <input type="text" name="newBodyfat" id="newBodyfatInput" placeholder="New Bodyfat%...">
+            <button type="submit" class="btn btn-success ml-3 py-0 px-3">Confirm</button>
         </form>
     </div>
 
@@ -96,6 +96,7 @@
         <span class="pl-4" style="display: block">Bodyfat: <input type="radio" id="filterBodyfatRadio" value="bodyfat"></span>
         <span class="pl-4 my-2" style="display: block"><input type="text" id="filterInput"></span>
         <span class="pl-4 my-2" style="display: block;"><button class="btn btn-primary" id="submitFilter">Apply</button></span>
+        <span class="pl-4 my-2" style="display: block;"><button class="btn btn-success" id="resetFilter">Reset</button></span>
     </div>
 
 
