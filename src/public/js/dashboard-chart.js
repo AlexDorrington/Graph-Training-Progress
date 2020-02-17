@@ -1,37 +1,42 @@
-//SORT DATA BY DATE
-//FIND MIN AND MAX FOR Y AXIS
-
 const chartCanvas = document.getElementById('weightChart').getContext('2d');
 
 const renderChart = async () => {
-    const data = await issueChartData(weightData)
+    const {weigh, dates} = await issueChartData(weightData)
     new Chart(chartCanvas, {
         type: 'line',
         data: {
             datasets: [{
                 label: 'Weight',
-                data: data.weigh,
-                borderColor: [
-                    'rgba(255, 99, 132)'
-                ],
-                borderWidth: 1
+                data: weigh,
+                borderColor: '#ff6600',
+                borderWidth: 2
             }]
         },
         options: {
+            legend: {
+                labels: {
+                    fontColor: "#ff6600",
+                    fontSize: 16
+                }
+            },
             scales: {
                 yAxes: [{
                     ticks: {
-                        suggestedMin: data.weigh[0],
-                        suggestedMax: data.weigh[data.weigh.length - 1]
+                        suggestedMin: weigh[0],
+                        suggestedMax: weigh[weigh.length - 1],
+                        fontColor: '#ff6600',
+                        fontSize: 14
                     },
                     scaleLabel: {
                         display: true,
-                        labelString: `Weight`
+                        labelString: `Weight`,
+                        fontColor: '#ff6600',
+                        fontSize: 14
                     }
                 }],
                 xAxes: [{
                     type: 'category',
-                    labels: data.dates,
+                    labels: dates,
                     display: false
                 }]
             }
@@ -42,19 +47,25 @@ const renderChart = async () => {
 
 const issueChartData = async (dataset) => {
     const dataRecords = await dataset.map((data) => {
-        let dateRecord = data.date.replace(/-/g, '')
+        const {date, weight, bodyfat} = data
+        const dateRecord = date.replace(/-/g, '')
         return {
-            weight: parseInt(data.weight),
-            bodyfat: parseInt(data.bodyfat),
+            weight: parseInt(weight),
+            bodyfat: parseInt(bodyfat),
             date: parseInt(dateRecord)
         }
     })
+
     dataRecords.sort((a, b) => a.date - b.date)
-    const weigh = dataRecords.map(data => {
-        return data.weight
-    })
-    const dates = dataRecords.map(data => {
-        return data.date
+
+    const weigh = dataRecords.map(data => data.weight)
+
+    const dates = dataRecords.map((data) => {
+        const {date} = data
+        const dateAsArray = date.toString().split('')
+        dateAsArray.splice(4, 0, '-')
+        dateAsArray.splice(7, 0, '-')
+        return dateAsArray.join('')
     })
     return {
         weigh,

@@ -169,6 +169,7 @@ const editItem = async (e) => {
         setTimeout(() => {
             contentEditSpinner.style.display = 'none'
             fetchWeightData()
+            renderChart()
         }, 1750)
     }, {
         once: true
