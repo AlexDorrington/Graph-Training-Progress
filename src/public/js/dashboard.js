@@ -14,7 +14,7 @@ const fetchWeightData = async () => {
     weightData = await jsonData
     user = weightData[0].user
     renderWeightData(jsonData)
-    renderChart(weightData)
+    renderChart()
     getEditBtns()
     getDeleteBtns()
 }
@@ -95,6 +95,7 @@ weightForm.addEventListener('submit', async (e) => {
     })
     renderNewWeight(weight, bodyfat, date, dataID, btn)
     loadingSpinner.style.display = 'block'
+    renderChart()
 })
 
 //CHECK IF POST DATE ALREADY EXISTS
