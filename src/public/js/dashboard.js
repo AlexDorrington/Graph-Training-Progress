@@ -1,5 +1,6 @@
 const dataBlocksContainer = document.getElementById('dataContainer')
 const loadingSpinner = document.getElementById('contentAddedSpinner')
+const contentEditSpinner = document.getElementById('contentEditSpinner')
 let weightData;
 let user;
 
@@ -50,12 +51,14 @@ const kgRadioBtn = document.getElementById('kgInput')
 const lbsRadioBtn = document.getElementById('lbsInput')
 
 kgRadioBtn.addEventListener('change', (e) => {
-    if (e.target.checked) {
+    const {target :{checked}} = e
+    if (checked) {
         lbsRadioBtn.checked = false
     }
 })
 lbsRadioBtn.addEventListener('change', (e) => {
-    if (e.target.checked) {
+    const {target :{checked}} = e
+    if (checked) {
         kgRadioBtn.checked = false
     }
 })
@@ -100,9 +103,7 @@ weightForm.addEventListener('submit', async (e) => {
 
 //CHECK IF POST DATE ALREADY EXISTS
 const checkDateExists = async (date) => {
-    const foundMatch = await weightData.find(item => {
-        return item.date == date
-    })
+    const foundMatch = await weightData.find(item => item.date == date)
     return (foundMatch)
 }
 
@@ -138,14 +139,11 @@ const newWeightInput = document.getElementById('newWeightInput')
 const newBodyfatInput = document.getElementById('newBodyfatInput')
 
 const getEditBtns = () => {
-    const editBtns = document.querySelectorAll('.editBtn')
-    editBtnArray = Array.from(editBtns)
+    editBtnArray = Array.from(document.querySelectorAll('.editBtn'))
     editBtnArray.forEach(btn => {
         btn.addEventListener('click', editItem)
     })
 }
-
-const contentEditSpinner = document.getElementById('contentEditSpinner')
 
 const editItem = async (e) => {
     const dataID = e.target.id

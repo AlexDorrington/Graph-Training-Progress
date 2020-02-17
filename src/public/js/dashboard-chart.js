@@ -6,7 +6,7 @@ const renderChart = async () => {
         type: 'line',
         data: {
             datasets: [{
-                label: 'Weight',
+                label: 'Weight progression',
                 data: weigh,
                 borderColor: '#ff6600',
                 borderWidth: 2
@@ -25,7 +25,7 @@ const renderChart = async () => {
                         suggestedMin: weigh[0],
                         suggestedMax: weigh[weigh.length - 1],
                         fontColor: '#ff6600',
-                        fontSize: 14
+                        fontSize: 14,
                     },
                     scaleLabel: {
                         display: true,

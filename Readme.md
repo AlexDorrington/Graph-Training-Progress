@@ -6,7 +6,7 @@ Passport for auth
 bootstrap
 
 Todo next:
- - Impliment chart.js
+ - Re-render chart when delete data block
  - Make form inputs required
  - Tidy markup
 
