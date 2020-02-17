@@ -12,3 +12,17 @@ body {
     transform: translateX(17vw);
     transition-duration: 1.5s;
 }
+.navItem {
+    cursor: pointer;
+}
+.navItem:hover {
+    color: #ffffff
+}
+#addNewWeightBtn:hover {
+    background-color: #ffffff !important;
+    color: #343a40 !important;
+}
+#addNewWeightBtn:focus, #addNewWeightBtn:active {
+    outline-color: #343a40 !important;
+    background-color: #343a40 !important;
+}

@@ -142,7 +142,9 @@ const getEditBtns = () => {
         btn.addEventListener('click', editItem)
     })
 }
+
 const contentEditSpinner = document.getElementById('contentEditSpinner')
+
 const editItem = async (e) => {
     const dataID = e.target.id
     editDiv.style.display = 'block'
