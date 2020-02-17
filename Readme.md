@@ -6,10 +6,9 @@ Passport for auth
 bootstrap
 
 Todo next:
- - Apply visual to filtered blocks
+ - Impliment chart.js
  - Make form inputs required
  - Tidy markup
- - Impliment chart.js
 
  Expansion:
  - Add exercises feature as well

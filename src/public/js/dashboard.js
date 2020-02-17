@@ -11,9 +11,10 @@ const fetchWeightData = async () => {
         method: 'GET'
     })
     const jsonData = await data.json()
-    weightData = jsonData
+    weightData = await jsonData
     user = weightData[0].user
     renderWeightData(jsonData)
+    renderChart(weightData)
     getEditBtns()
     getDeleteBtns()
 }
