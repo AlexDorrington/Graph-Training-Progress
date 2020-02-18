@@ -73,3 +73,19 @@ closeModalBtn.addEventListener('click', () => {
     dataAddedTip.style.display = 'none'
     dataMatchTip.style.display = 'none'
 })
+
+
+//HIDE AND SHOW CHARTS
+const weightChartBtn = document.getElementById('weightChartBtn')
+const bodyfatChartBtn = document.getElementById('bodyfatChartBtn')
+const displayWeightChart = document.getElementById('displayWeightChart')
+const displayBodyfatChart = document.getElementById('displayBodyfatChart')
+
+weightChartBtn.addEventListener('click', () => {
+    displayWeightChart.style.display = 'block'
+    displayBodyfatChart.style.display = 'none'
+})
+bodyfatChartBtn.addEventListener('click', () => {
+    displayBodyfatChart.style.display = 'block'
+    displayWeightChart.style.display = 'none'
+})

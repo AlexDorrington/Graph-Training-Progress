@@ -15,7 +15,8 @@ const fetchWeightData = async () => {
     weightData = await jsonData
     user = weightData[0].user
     renderWeightData(jsonData)
-    renderChart()
+    renderWeightChart()
+    renderBodyfatChart()
     getEditBtns()
     getDeleteBtns()
 }
@@ -52,15 +53,11 @@ const lbsRadioBtn = document.getElementById('lbsInput')
 
 kgRadioBtn.addEventListener('change', (e) => {
     const {target :{checked}} = e
-    if (checked) {
-        lbsRadioBtn.checked = false
-    }
+    checked ? lbsRadioBtn.checked = false : lbsRadioBtn.checked = true
 })
 lbsRadioBtn.addEventListener('change', (e) => {
     const {target :{checked}} = e
-    if (checked) {
-        kgRadioBtn.checked = false
-    }
+    checked ? kgRadioBtn.checked = false : kgRadioBtn.checked = false
 })
 
 weightForm.addEventListener('submit', async (e) => {
@@ -98,13 +95,14 @@ weightForm.addEventListener('submit', async (e) => {
     })
     renderNewWeight(weight, bodyfat, date, dataID, btn)
     loadingSpinner.style.display = 'block'
-    renderChart()
+    renderWeightChart()
+    renderBodyfatChart()
 })
 
 //CHECK IF POST DATE ALREADY EXISTS
 const checkDateExists = async (date) => {
     const foundMatch = await weightData.find(item => item.date == date)
-    return (foundMatch)
+    return foundMatch
 }
 
 
@@ -167,7 +165,8 @@ const editItem = async (e) => {
         setTimeout(() => {
             contentEditSpinner.style.display = 'none'
             fetchWeightData()
-            renderChart()
+            renderWeightChart()
+            renderBodyfatChart()
         }, 1750)
     }, {
         once: true
@@ -202,5 +201,6 @@ const deleteItem = async (e) => {
     offsetParent.style.display = 'none'
     const itemIndex = await weightData.findIndex((data) => data.dataID == id)
     await weightData.splice(itemIndex, 1)
-    renderChart()
+    renderWeightChart()
+    renderBodyfatChart()
 }

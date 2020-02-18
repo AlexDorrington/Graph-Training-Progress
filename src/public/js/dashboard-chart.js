@@ -1,8 +1,9 @@
-const chartCanvas = document.getElementById('weightChart').getContext('2d');
+const chartCanvasWeight = document.getElementById('weightChart').getContext('2d');
+const chartCanvasBodyfat = document.getElementById('bodyfatChart').getContext('2d');
 
-const renderChart = async () => {
+const renderWeightChart = async () => {
     const {weigh, dates} = await issueChartData(weightData)
-    new Chart(chartCanvas, {
+    new Chart(chartCanvasWeight, {
         type: 'line',
         data: {
             datasets: [{
@@ -44,6 +45,50 @@ const renderChart = async () => {
     });
 }
 
+const renderBodyfatChart = async () => {
+    const {bodyfat, dates} = await issueChartData(weightData)
+    new Chart(chartCanvasBodyfat, {
+        type: 'line',
+        data: {
+            datasets: [{
+                label: 'Bodyfat progression',
+                data: bodyfat,
+                borderColor: '#ff6600',
+                borderWidth: 2
+            }]
+        },
+        options: {
+            legend: {
+                labels: {
+                    fontColor: "#ff6600",
+                    fontSize: 16
+                }
+            },
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        suggestedMin: bodyfat[0],
+                        suggestedMax: bodyfat[bodyfat.length - 1],
+                        fontColor: '#ff6600',
+                        fontSize: 14,
+                    },
+                    scaleLabel: {
+                        display: true,
+                        labelString: `Bodyfat`,
+                        fontColor: '#ff6600',
+                        fontSize: 14
+                    }
+                }],
+                xAxes: [{
+                    type: 'category',
+                    labels: dates,
+                    display: false
+                }]
+            }
+        }
+    });
+}
+
 
 const issueChartData = async (dataset) => {
     const dataRecords = await dataset.map((data) => {
@@ -59,6 +104,7 @@ const issueChartData = async (dataset) => {
     dataRecords.sort((a, b) => a.date - b.date)
 
     const weigh = dataRecords.map(data => data.weight)
+    const bodyfat = dataRecords.map(data => data.bodyfat)
 
     const dates = dataRecords.map((data) => {
         const {date} = data
@@ -69,6 +115,7 @@ const issueChartData = async (dataset) => {
     })
     return {
         weigh,
+        bodyfat,
         dates
     }
 }

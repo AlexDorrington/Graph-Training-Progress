@@ -105,10 +105,18 @@
     </div>
 
 
-
+    <!--DISPLAY GRAPH-->
+    <div class="container-fluid mx-auto" style="width: 95%">
+        <button class="btn" id="weightChartBtn" style="cursor: pointer;">Weight</button>
+        <button class="btn" id="bodyfatChartBtn" style="cursor: pointer;">Bodyfat</button>
+    </div>
     <div class="container-fluid mx-auto" style="width: 95%;">
-        <!--DISPLAY GRAPH-->
-        <canvas id="weightChart" width="1800" height="500" class="bg-dark"></canvas>
+        <div id="displayWeightChart" style="display: block">
+            <canvas id="weightChart" width="1800" height="500" class="bg-dark"></canvas>
+        </div>
+        <div id="displayBodyfatChart" style="display: none;">
+            <canvas id="bodyfatChart" width="1800" height="500" class="bg-dark"></canvas>
+        </div>
     </div>
     
 <script src="https://kit.fontawesome.com/bb13b54565.js" crossorigin="anonymous"></script>
