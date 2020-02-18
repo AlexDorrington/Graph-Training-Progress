@@ -82,10 +82,19 @@ const displayWeightChart = document.getElementById('displayWeightChart')
 const displayBodyfatChart = document.getElementById('displayBodyfatChart')
 
 weightChartBtn.addEventListener('click', () => {
+    weightChartBtn.classList.toggle('activeChartBtn')
+    bodyfatChartBtn.classList.toggle('activeChartBtn')
+    weightChartBtn.classList.toggle('inactiveChartBtn')
+    bodyfatChartBtn.classList.toggle('inactiveChartBtn')
     displayWeightChart.style.display = 'block'
     displayBodyfatChart.style.display = 'none'
+
 })
 bodyfatChartBtn.addEventListener('click', () => {
+    bodyfatChartBtn.classList.toggle('activeChartBtn')
+    weightChartBtn.classList.toggle('activeChartBtn')
+    bodyfatChartBtn.classList.toggle('inactiveChartBtn')
+    weightChartBtn.classList.toggle('inactiveChartBtn')
     displayBodyfatChart.style.display = 'block'
     displayWeightChart.style.display = 'none'
 })

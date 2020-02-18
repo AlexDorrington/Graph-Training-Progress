@@ -74,7 +74,7 @@ const renderBodyfatChart = async () => {
                     },
                     scaleLabel: {
                         display: true,
-                        labelString: `Bodyfat`,
+                        labelString: `Bodyfat %`,
                         fontColor: '#ff6600',
                         fontSize: 14
                     }
