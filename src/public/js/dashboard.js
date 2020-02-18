@@ -185,6 +185,7 @@ const getDeleteBtns = () => {
 }
 
 const deleteItem = async (e) => {
+    const {target: {offsetParent, id}} = e
     const confirmDelete = confirm('Would you like to delete this item?')
     if (!confirmDelete) {
         return
@@ -195,9 +196,11 @@ const deleteItem = async (e) => {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            dataID: e.target.id
+            dataID: id
         })
     })
-    e.target.offsetParent.style.display = 'none'
-    weightData.length = 0
+    offsetParent.style.display = 'none'
+    const itemIndex = await weightData.findIndex((data) => data.dataID == id)
+    await weightData.splice(itemIndex, 1)
+    renderChart()
 }
