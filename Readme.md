@@ -1,3 +1,8 @@
+Test login: 
+U - ajdorrington@hotmail.co.uk
+P - 1234567
+
+
 Graph training progress with bodystats and exercises
 
 MongoDB
@@ -7,7 +12,6 @@ bootstrap
 
 Todo next:
  - Make form inputs required
- - Tidy markup
 
  Expansion:
  - Add exercises feature as well

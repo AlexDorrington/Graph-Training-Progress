@@ -1,0 +1,30 @@
+body {
+    width: 100%;
+    min-height: 100vh;
+    box-sizing: border-box;
+    background-color: #000;
+    background-image: url(/img/two-dumbbells-669580.jpg);
+    background-position: center;
+    background-size: cover;
+    overflow-x: hidden;
+    margin-bottom: 5px;
+}
+.fa-dumbbell {
+    color: #ff6600;
+}
+nav > div {
+    color: #ff6600;
+}
+.navItem {
+    cursor: pointer;
+}
+.navItem > a {
+    color: #ff6600;
+}
+.activeNavItem > a {
+    color: #ffffff;
+}
+.navItem > a:hover {
+    color: #ffffff;
+    text-decoration: none;
+}

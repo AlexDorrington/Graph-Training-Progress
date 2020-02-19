@@ -5,7 +5,8 @@ const session = require('express-session')
 require('./database/connect-mongo')
 
 const {authRoutes} = require('./routes/public/authUser')
-const {authorisedRoutes} = require('./routes/private/dashboard')
+const {dashboardRoutes} = require('./routes/private/dashboard')
+const {exercisesRoute} = require('./routes/private/exercises')
 
 const {ensureAuth} = require('./auth/passport')
 const {newStrategy} = require('./auth/passport')
@@ -30,7 +31,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use('/home', authRoutes)
-app.use('/dashboard', authorisedRoutes)
+app.use('/dashboard', dashboardRoutes)
+app.use('/exercises', exercisesRoute)
 
 //DEFAULT FOR UNDECLARED ROUTES
 app.use('*', ensureAuth, (req, res, next) => {

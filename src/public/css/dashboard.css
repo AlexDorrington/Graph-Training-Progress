@@ -19,14 +19,18 @@ body {
 nav > div {
     color: #ff6600;
 }
-.activeNavItem {
-    color: #ffffff;
-}
 .navItem {
     cursor: pointer;
 }
-.navItem:hover {
-    color: #ffffff
+.navItem > a {
+    color: #ff6600;
+}
+.activeNavItem > a {
+    color: #ffffff;
+}
+.navItem > a:hover {
+    color: #ffffff;
+    text-decoration: none;
 }
 #addNewWeightBtn {
     width: 85%;

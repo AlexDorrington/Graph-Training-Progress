@@ -114,5 +114,5 @@ router.delete('/weight/:id', async(req, res, next) => {
 
 
 module.exports = {
-    authorisedRoutes: router
+    dashboardRoutes: router
 }
