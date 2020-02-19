@@ -7,6 +7,7 @@ require('./database/connect-mongo')
 const {authRoutes} = require('./routes/public/authUser')
 const {authorisedRoutes} = require('./routes/private/dashboard')
 
+const {ensureAuth} = require('./auth/passport')
 const {newStrategy} = require('./auth/passport')
 newStrategy(passport)
 
@@ -30,6 +31,11 @@ app.use(passport.session());
 
 app.use('/home', authRoutes)
 app.use('/dashboard', authorisedRoutes)
+
+//DEFAULT FOR UNDECLARED ROUTES
+app.use('*', ensureAuth, (req, res, next) => {
+        res.sendFile('/views/private/dashboard.html')
+})
 
 
 app.listen(PORT, () => {

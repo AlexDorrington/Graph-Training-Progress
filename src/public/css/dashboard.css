@@ -13,11 +13,29 @@ body {
     transform: translateX(17vw);
     transition-duration: 1.5s;
 }
+.fa-dumbbell {
+    color: #ff6600;
+}
+nav > div {
+    color: #ff6600;
+}
+.activeNavItem {
+    color: #ffffff;
+}
 .navItem {
     cursor: pointer;
 }
 .navItem:hover {
     color: #ffffff
+}
+#addNewWeightBtn {
+    width: 85%;
+    color: #ff6600;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    font-weight: bolder;
+    border-radius: 0px 0px 5px 5px;
 }
 #addNewWeightBtn:hover {
     background-color: #ffffff !important;
@@ -26,6 +44,81 @@ body {
 #addNewWeightBtn:focus, #addNewWeightBtn:active {
     outline-color: #343a40 !important;
     background-color: #343a40 !important;
+}
+#editDiv {
+    width: 50vw;
+    height: 5vh;
+    margin: auto;
+    display: none;
+    padding: 5px;
+    position: relative;
+}
+#editWeightForm {
+    height: 100%;
+}
+#editWeightForm > label {
+    color: #ffffff;
+    font-weight: bolder;
+}
+#contentEditSpinner {
+    display: none;
+    margin: auto;
+    position: absolute;
+    top: 20vh;
+    left: 50vw;
+}
+#weightModal {
+    position: relative;
+    top: -10vh;
+}
+#dataContainer {
+    width: 90vw;
+    height: 35vh;
+    margin: auto;
+    flex-wrap: wrap;
+    overflow-x: auto;
+}
+.filterBox {
+    width: 20vw;
+    border: 1px solid black;
+    height: 40vh;
+    position: absolute;
+    left: -17vw;
+    top: 25%;
+    background-color: #ff6600b0;
+    border-radius: .25rem;
+}
+.filterBox > span {
+    display: block;
+}
+#moveFilterBox {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    cursor: pointer;
+    color: #343a40;
+}
+#filterText {
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+    position: absolute;
+    right: -20px;
+    top: 65px;
+    text-transform: uppercase;
+    color: #343a40;
+}
+#displayWeightChart {
+    display: block;
+}
+#displayBodyfatChart {
+    display: none;
+}
+#contentAddTip, #contentMatchTip {
+    display: none;
+}
+#weightChartBtn, #bodyfatChartBtn {
+    cursor: pointer;
+    border-radius: 0;
 }
 .activeChartBtn {
     background-color: #343a40;
@@ -37,4 +130,7 @@ body {
 }
 .activeChartBtn:focus {
     box-shadow: none;
+}
+.graphContainer {
+    width: 95%;
 }

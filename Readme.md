@@ -6,8 +6,6 @@ Passport for auth
 bootstrap
 
 Todo next:
- - Re-render chart when delete data block
- - Add bodyfat to same and alternate on another graph
  - Make form inputs required
  - Tidy markup
 
