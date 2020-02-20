@@ -55,6 +55,7 @@ nav > div {
 #daysContainer {
     width: 30%;
     min-height: 20vh;
+    margin-left: 8% !important;
 }
 .dayBtn {
     width: 12%;
@@ -66,4 +67,16 @@ nav > div {
     color: #343a40;
     float: left;
     font-weight: bolder;
+    cursor: pointer;
+}
+.dayBtn:hover {
+    color: #ff6600;
+    background-color: #343a40;
+}
+#daysDataContainer {
+    display: none;
+    border: 1px solid black;
+    min-height: 30vh;
+    width: 50%;
+    margin-right: 8%;
 }

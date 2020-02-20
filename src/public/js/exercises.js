@@ -22,6 +22,7 @@ monthBtnsDiv.addEventListener('click', ({target}) => {
     const btnMonthName = target
     daysContainer.innerHTML = ''
     if (btnMonthName.classList.contains('activeMonth')) {
+        document.getElementById('daysDataContainer').style.display = 'none'
         return btnMonthName.classList.remove('activeMonth')
     }
     renderBtnsStatus(btnMonthName)
@@ -30,6 +31,12 @@ monthBtnsDiv.addEventListener('click', ({target}) => {
         newDayBtn.classList.add('dayBtn')
         newDayBtn.innerHTML = day
         daysContainer.appendChild(newDayBtn)
+        newDayBtn.addEventListener('click', () => {
+            document.getElementById('daysDataContainer').style.display = 'block'
+            console.log({
+                newo: 'bject'
+            })
+        })
     })
 })
 
@@ -43,11 +50,11 @@ const renderBtnsStatus = (activeBtn) => {
 
 const returnNoOfDays = (btnName, cb) => {
     const btnMonth = btnName
-    const monthFromCalendarArry = calendar.find((month) => month[0].toLowerCase() == btnMonth)
+    const monthFromCalendarArray = calendar.find((month) => month[0].toLowerCase() == btnMonth)
     let i = 1;
     do {
         cb(i)
         i++
-    } while (i <= monthFromCalendarArry[1])
+    } while (i <= monthFromCalendarArray[1])
 }
 
