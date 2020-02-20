@@ -28,3 +28,33 @@ nav > div {
     color: #ffffff;
     text-decoration: none;
 }
+.month {
+    width: 7%;
+    background-color: #ff6600;
+    color: #343a40;
+    font-weight: bolder;
+    border: 1px solid #343a40;
+    border-radius: 0px 0px 5px 5px !important;
+}
+.activeMonth {
+    color: #ff6600;
+    background-color: #343a40;
+}
+.month:focus {
+    box-shadow: none;
+}
+.month:hover {
+    color: #ff6600;
+    background-color: #343a40;
+}
+.dayBtn {
+    width: 12%;
+    border-radius: 50%;
+    padding: 10px;
+    border: 2px solid #343a40;
+    margin: 2px;
+    background-color: #ff6600;
+    color: #343a40;
+    float: left;
+    font-weight: bolder;
+}
