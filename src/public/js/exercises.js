@@ -14,28 +14,31 @@ const calendar = [
 ]
 
 
-//RENDER DAYS PER MONTH DIV
+//RENDER DAYS PER MONTH BUTTONS IN DIV
 const monthBtnsDiv = document.getElementById('monthBtns')
 const daysContainer = document.getElementById('daysContainer')
 
-monthBtnsDiv.addEventListener('click', (e) => {
+monthBtnsDiv.addEventListener('click', ({target}) => {
+    const btnMonthName = target
     daysContainer.innerHTML = ''
-    renderBtnsInactive()
-    e.target.classList.add('activeMonth')
-    const btnMonthName = e.target.name
-    returnNoOfDays(btnMonthName, (day) => {
-        const newButton = document.createElement('button')
-        newButton.classList.add('dayBtn')
-        newButton.innerHTML = day
-        daysContainer.appendChild(newButton)
+    if (btnMonthName.classList.contains('activeMonth')) {
+        return btnMonthName.classList.remove('activeMonth')
+    }
+    renderBtnsStatus(btnMonthName)
+    returnNoOfDays(btnMonthName.name, (day) => {
+        const newDayBtn = document.createElement('button')
+        newDayBtn.classList.add('dayBtn')
+        newDayBtn.innerHTML = day
+        daysContainer.appendChild(newDayBtn)
     })
 })
 
-const renderBtnsInactive = () => {
-    const btns = Array.from(document.querySelectorAll('.month'))
-    btns.forEach(btn => {
+const renderBtnsStatus = (activeBtn) => {
+    const monthBtns = Array.from(document.querySelectorAll('.month'))
+    for (let btn of monthBtns) {
         btn.classList.remove('activeMonth')
-    })
+    }
+    activeBtn.classList.add('activeMonth')
 }
 
 const returnNoOfDays = (btnName, cb) => {

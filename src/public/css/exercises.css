@@ -28,6 +28,11 @@ nav > div {
     color: #ffffff;
     text-decoration: none;
 }
+#monthBtns {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
 .month {
     width: 7%;
     background-color: #ff6600;
@@ -46,6 +51,10 @@ nav > div {
 .month:hover {
     color: #ff6600;
     background-color: #343a40;
+}
+#daysContainer {
+    width: 30%;
+    min-height: 20vh;
 }
 .dayBtn {
     width: 12%;
