@@ -17,25 +17,25 @@ const calendar = [
 //RENDER DAYS PER MONTH BUTTONS IN DIV
 const monthBtnsDiv = document.getElementById('monthBtns')
 const daysContainer = document.getElementById('daysContainer')
+const daysDataContainer = document.getElementById('daysDataContainer')
 
 monthBtnsDiv.addEventListener('click', ({target}) => {
     const btnMonthName = target
     daysContainer.innerHTML = ''
     if (btnMonthName.classList.contains('activeMonth')) {
-        document.getElementById('daysDataContainer').style.display = 'none'
-        return btnMonthName.classList.remove('activeMonth')
+        daysDataContainer.style.display = 'none'
+        btnMonthName.classList.remove('activeMonth')
+        return;
     }
     renderBtnsStatus(btnMonthName)
     returnNoOfDays(btnMonthName.name, (day) => {
         const newDayBtn = document.createElement('button')
+        newDayBtn.name = day
         newDayBtn.classList.add('dayBtn')
         newDayBtn.innerHTML = day
         daysContainer.appendChild(newDayBtn)
-        newDayBtn.addEventListener('click', () => {
-            document.getElementById('daysDataContainer').style.display = 'block'
-            console.log({
-                newo: 'bject'
-            })
+        newDayBtn.addEventListener('click', (e) => {
+            daysDataContainer.style.display = 'block'
         })
     })
 })

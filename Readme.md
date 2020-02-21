@@ -10,8 +10,9 @@ Node.js - Express
 Passport for auth
 bootstrap
 
-Todo next:
+Dashboard todo next:
  - Make form inputs required
 
- Expansion:
- - Add exercises feature as well
+Exercises todo next:
+ - Create object on save
+ - Push to json file

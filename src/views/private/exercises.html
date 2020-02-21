@@ -33,12 +33,49 @@
     </div>
     <div class="container-fluid d-flex justify-content-between">
         <div id="daysContainer"></div>
-        <div id="daysDataContainer"></div>
+        <div id="daysDataContainer">
+            <table class="text-center">
+                <tr>
+                    <th></th>
+                    <th>Squats</th>
+                    <th>Bench Press</th>
+                    <th>Shoulder Press</th>
+                    <th>Deadlift</th>
+                </tr>
+                <tr>
+                    <th>Max reps</th>
+                    <td><input type="number" class="text-center statInput" placeholder="..." disabled></td>
+                    <td><input type="number" class="text-center statInput" placeholder="..." disabled></td>
+                    <td><input type="number" class="text-center statInput" placeholder="..." disabled></td>
+                    <td><input type="number" class="text-center statInput" placeholder="..." disabled></td>
+                </tr>
+                <tr>
+                    <th>Weight</th>
+                    <td><input type="number" class="text-center statInput" placeholder="..." disabled></td>
+                    <td><input type="number" class="text-center statInput" placeholder="..." disabled></td>
+                    <td><input type="number" class="text-center statInput" placeholder="..." disabled></td>
+                    <td><input type="number" class="text-center statInput" placeholder="..." disabled></td>
+                </tr>
+                <tr>
+                    <th>1 rep max</br>(Estimated)</th>
+                    <td><input type="number" class="text-center statInput" placeholder="..." disabled></td>
+                    <td><input type="number" class="text-center statInput" placeholder="..." disabled></td>
+                    <td><input type="number" class="text-center statInput" placeholder="..." disabled></td>
+                    <td><input type="number" class="text-center statInput" placeholder="..." disabled></td>
+                </tr>
+            </table>
+            <div class="d-flex justify-content-center py-1">
+                <button class="btn btn-primary mx-2" id="editBtn">Edit</button>
+                <button class="btn btn-success mx-2" id="saveBtn">Save</button>
+                <button class="btn btn-danger mx-2" id="deleteBtn">Delete</button>
+            </div>
+        </div>
     </div>
 
 <script src="https://kit.fontawesome.com/bb13b54565.js" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <script src="/js/exercises.js"></script>
+<script src="/js/exercises-utils.js"></script>
 </body>
 </html>

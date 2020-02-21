@@ -75,8 +75,42 @@ nav > div {
 }
 #daysDataContainer {
     display: none;
-    border: 1px solid black;
     min-height: 30vh;
     width: 50%;
     margin-right: 8%;
+    padding: 5px 0;
+}
+#daysDataContainer > table {
+    width: 100%;
+    border: 2px solid black;
+}
+tr {
+    border-bottom: 2px solid black;
+}
+th {
+    width: 15%;
+    background-color: #ff6600;
+}
+td {
+    background-color: #343a40;
+}
+th, td {
+    border-right: 2px solid black;
+}
+input[type=number] {
+    background-color: #343a40;
+    color: #ff6600;
+    font-weight: bolder;
+    border: none;
+    width: 50%;
+}
+input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none; 
+    margin: 0; 
+}
+#editBtn, #saveBtn, #deleteBtn {
+    width: 100px;
+}
+.inactiveBtn {
+    filter: brightness(50%);
 }
