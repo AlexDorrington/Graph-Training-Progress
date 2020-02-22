@@ -38,8 +38,8 @@ monthBtnsDiv.addEventListener('click', ({target}) => {
         daysContainer.appendChild(newDayBtn)
         newDayBtn.addEventListener('click', (e) => {
             daysDataContainer.style.display = 'block'
-            // activeDateBtn = e.target.name
-            // findData()
+            activeDateBtn = e.target.name
+            findExistingData(activeDateBtn)
         })
     })
 })
@@ -63,16 +63,28 @@ const returnNoOfDays = (btnName, cb) => {
 }
 
 
-//RETRIEVE EXISTING DATA IF EXISTS
-// const findData = async () => {
-//     const foundData = await fetch('http://localhost:3000/exercises/retrieve', {
-//         headers: {
-//             'Content-Type': 'application/json'
-//         }
-//     })
-//     const data = await foundData.json()
-//     console.log(data)
-// }
+//RETRIEVE EXISTING DATA IF EXISTS - Add btn name to search through json for match?
+const findExistingData = async (date) => {
+    const foundData = await fetch(`http://localhost:3000/exercises/retrieve/${date}`, {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    const data = await foundData.json()
+    if (data.length > 0) {
+        //const {squats, bench, shoulder, deadlift} = data[0]
+        renderTableRepData(data)
+        return
+    }
+    return console.log('No existing data')
+}
+
+// const squatRepsInput = document.getElementById('squatReps')
+// const benchRepsInput = document.getElementById('benchReps')
+// const shoulderRepsInput = document.getElementById('shoulderReps')
+// const deadliftRepsInput = document.getElementById('deadliftReps')
+
+// const exerciseRepsArray = [squatRepsInput, benchRepsInput, shoulderRepsInput, deadliftRepsInput]
 
 
 //SAVE EXERCISE DATA - SEND TO JSON FILE
@@ -117,11 +129,8 @@ class Exercises {
 }
 
 saveBtn.addEventListener('click', async () => {
-    const {reps, weight, max} = new Exercises(500, 300, 200, 100, 50, 30, 20, 10)
-    document.getElementById('squatMax').value = max().squatMax
-    document.getElementById('benchMax').value = max().benchMax
-    document.getElementById('shoulderMax').value = max().shoulderMax
-    document.getElementById('deadliftMax').value = max().deadliftMax
+    const {reps, weight, max} = new Exercises(500, 300)
+    renderRepMax(max)
     fetch(`http://localhost:3000/exercises`, {
         method: 'post',
         headers: {
@@ -131,7 +140,7 @@ saveBtn.addEventListener('click', async () => {
             dateBtn: activeDateBtn,
             id: Date.now(),
             squats: {
-                rep: reps().squatReps,
+                reps: reps().squatReps,
                 weight: weight().squatWeight,
                 maxRep: max().squatMax
             },
@@ -154,3 +163,14 @@ saveBtn.addEventListener('click', async () => {
     })
 })
 
+const squatMaxInput = document.getElementById('squatMax')
+const benchMaxInput = document.getElementById('benchMax')
+const shoulderMaxInput = document.getElementById('shoulderMax')
+const deadliftMaxInput = document.getElementById('deadliftMax')
+
+const renderRepMax = (calcMax) => {
+    squatMaxInput.value = calcMax().squatMax
+    benchMaxInput.value = calcMax().benchMax
+    shoulderMax.value = calcMax().shoulderMax
+    deadliftMaxInput.value = calcMax().deadliftMax
+}

@@ -14,17 +14,31 @@ router.get('/', ensureAuth, (req, res, next) => {
     })
 })
 
-router.get('/retrieve', (req, res, next) => {
-    res.json({
-        test: 'ok'
-    })
+router.get('/retrieve/:date', async (req, res, next) => {
+    let userID = req.user.id
+    const date = req.params.date
+    try {
+        fs.readFile(exerciseData, async (err, data) => {
+            if (err) {
+                console.log('No file found')
+                return res.json([])
+            }
+            const fileData = await JSON.parse(data)
+            const match = await fileData.filter((item) => item.user == userID && item.dateBtn == date)
+            if (!match) {
+                return res.json([])
+            }
+            res.json(match)
+        })
+    } catch (err) {
+        console.log(err)
+    }
 })
 
 router.post('/', ensureAuth, async (req, res, next) => {
     const userID = req.user.id
     let newExerciseData = Object.assign(req.body)
     newExerciseData.user = userID
-    //console.log(req.body)
     try {
         fs.readFile(exerciseData, async (err, data) => {
             if (err) {
