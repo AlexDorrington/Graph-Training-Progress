@@ -4,13 +4,14 @@ const fs = require('fs')
 const router = require('express').Router()
 
 const {ensureAuth} = require(path.join(__dirname, '../../', 'auth', 'passport.js'))
-const privateViews = path.join(__dirname + '/../../views/private')
 const weightData = path.join(__dirname + '/../../database/weightData.json')
 
 
 
 router.get('/', ensureAuth, (req, res, next) => {
-    res.sendFile(`${privateViews}/dashboard.html`)
+    res.sendFile(`dashboard.html`, {
+        root: __dirname + '/../../views/private'
+    })
 })
 
 

@@ -19,6 +19,7 @@ const actionBtns = [deleteBtn, saveBtn]
 
 const changeBtnVisual = () => {
     for (let btn of actionBtns) {
+        btn.disabled = !btn.disabled
         btn.classList.toggle('inactiveBtn')
     }
 }

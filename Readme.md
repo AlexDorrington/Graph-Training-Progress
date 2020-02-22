@@ -14,5 +14,4 @@ Dashboard todo next:
  - Make form inputs required
 
 Exercises todo next:
- - Create object on save
- - Push to json file
+ - Perform fetch to render content to table if any exist

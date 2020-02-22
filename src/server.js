@@ -35,8 +35,10 @@ app.use('/dashboard', dashboardRoutes)
 app.use('/exercises', exercisesRoute)
 
 //DEFAULT FOR UNDECLARED ROUTES
-app.use('*', ensureAuth, (req, res, next) => {
-        res.sendFile('/views/private/dashboard.html')
+app.use('/*', ensureAuth, (req, res, next) => {
+        res.sendFile('dashboard.html', {
+            root: __dirname + '/views/private'
+        })
 })
 
 

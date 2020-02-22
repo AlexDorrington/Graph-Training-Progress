@@ -1,13 +1,48 @@
 const path = require('path')
+const fs = require('fs')
 
 const router = require('express').Router()
 
+const exerciseData = path.join(__dirname + '/../../database/exerciseData.json')
+
 const {ensureAuth} = require('../../auth/passport')
-const privateViews = path.join(__dirname + '/../../views/private')
 
 
 router.get('/', ensureAuth, (req, res, next) => {
-    res.sendFile(`${privateViews}/exercises.html`)
+    res.sendFile(`exercises.html`, {
+        root: __dirname + '/../../views/private'
+    })
+})
+
+router.get('/retrieve', (req, res, next) => {
+    res.json({
+        test: 'ok'
+    })
+})
+
+router.post('/', ensureAuth, async (req, res, next) => {
+    const userID = req.user.id
+    let newExerciseData = Object.assign(req.body)
+    newExerciseData.user = userID
+    //console.log(req.body)
+    try {
+        fs.readFile(exerciseData, async (err, data) => {
+            if (err) {
+                fs.writeFile(exerciseData, JSON.stringify([newExerciseData]), () => {
+                    console.log('File created')
+                })
+                return res.json(newExerciseData)
+            }
+            const fileData = await JSON.parse(data)
+            fileData.push(newExerciseData)
+            fs.writeFile(exerciseData, JSON.stringify(fileData), () => {
+                console.log('New exercise data added')
+            })
+            res.json(fileData)
+        })
+    } catch (err) {
+        console.log(err)
+    }
 })
 
 
