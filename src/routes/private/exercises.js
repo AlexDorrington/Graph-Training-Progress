@@ -15,7 +15,7 @@ router.get('/', ensureAuth, (req, res, next) => {
 })
 
 router.get('/retrieve/:date', async (req, res, next) => {
-    let userID = req.user.id
+    const userID = req.user.id
     const date = req.params.date
     try {
         fs.readFile(exerciseData, async (err, data) => {

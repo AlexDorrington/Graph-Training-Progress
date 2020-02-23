@@ -14,4 +14,5 @@ Dashboard todo next:
  - Make form inputs required
 
 Exercises todo next:
- - Perform fetch to render content to table if any exist
+ - Generate a 1 rep max value
+ - render content to table if any exist

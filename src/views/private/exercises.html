@@ -18,18 +18,18 @@
         </div>
     </nav>
     <div class="container-fluid" id="monthBtns">
-        <button class="btn month" name="january">January</button>
-        <button class="btn month" name="february">February</button>
-        <button class="btn month" name="march">March</button>
-        <button class="btn month" name="april">April</button>
-        <button class="btn month" name="may">May</button>
-        <button class="btn month" name="june">June</button>
-        <button class="btn month" name="july">July</button>
-        <button class="btn month" name="august">August</button>
-        <button class="btn month" name="september">September</button>
-        <button class="btn month" name="october">October</button>
-        <button class="btn month" name="november">November</button>
-        <button class="btn month" name="december">December</button>
+        <button class="btn month" name="0">January</button>
+        <button class="btn month" name="1">February</button>
+        <button class="btn month" name="2">March</button>
+        <button class="btn month" name="3">April</button>
+        <button class="btn month" name="4">May</button>
+        <button class="btn month" name="5">June</button>
+        <button class="btn month" name="6">July</button>
+        <button class="btn month" name="7">August</button>
+        <button class="btn month" name="8">September</button>
+        <button class="btn month" name="9">October</button>
+        <button class="btn month" name="10">November</button>
+        <button class="btn month" name="11">December</button>
     </div>
     <div class="container-fluid d-flex justify-content-between">
         <div id="daysContainer"></div>
@@ -51,10 +51,10 @@
                 </tr>
                 <tr>
                     <th>Weight</th>
-                    <td><input type="number" class="text-center statInput" placeholder="..." disabled></td>
-                    <td><input type="number" class="text-center statInput" placeholder="..." disabled></td>
-                    <td><input type="number" class="text-center statInput" placeholder="..." disabled></td>
-                    <td><input type="number" class="text-center statInput" placeholder="..." disabled></td>
+                    <td><input type="number" class="text-center statInput" placeholder="..." disabled id="squatWeight"></td>
+                    <td><input type="number" class="text-center statInput" placeholder="..." disabled id="benchWeight"></td>
+                    <td><input type="number" class="text-center statInput" placeholder="..." disabled id="shoulderWeight"></td>
+                    <td><input type="number" class="text-center statInput" placeholder="..." disabled id="deadliftWeight"></td>
                 </tr>
                 <tr>
                     <th>1 rep max</br>(Estimated)</th>
@@ -64,6 +64,8 @@
                     <td><input type="number" class="text-center" id="deadliftMax" placeholder="..." disabled></td>
                 </tr>
             </table>
+            <h4 id="saveErrorMsg" style="display: none;">Please make sure reps and weight have values if either input</h4>
+            <h4 id="saveSuccessMsg" style="display: none;">Data saved</h4>
             <div class="d-flex justify-content-center py-1">
                 <button class="btn btn-primary mx-2" id="editBtn">Edit</button>
                 <button class="btn btn-success mx-2" id="saveBtn">Save</button>

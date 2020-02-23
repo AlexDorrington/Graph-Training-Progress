@@ -1,18 +1,18 @@
 let activeDateBtn;
 
 const calendar = [
-    ['January', 31],
-    ['February', 28],
-    ['March', 31],
-    ['April', 30],
-    ['May', 31],
-    ['June', 30],
-    ['July', 31],
-    ['August', 31],
-    ['September', 30],
-    ['October', 31],
-    ['November', 30],
-    ['December', 31]
+    ['0', 31],
+    ['1', 28],
+    ['2', 31],
+    ['3', 30],
+    ['4', 31],
+    ['5', 30],
+    ['6', 31],
+    ['7', 31],
+    ['8', 30],
+    ['9', 31],
+    ['10', 30],
+    ['11', 31]
 ]
 
 
@@ -32,7 +32,7 @@ monthBtnsDiv.addEventListener('click', ({target}) => {
     renderBtnsStatus(btnMonthName)
     returnNoOfDays(btnMonthName.name, (day, month) => {
         const newDayBtn = document.createElement('button')
-        newDayBtn.name = `${month}${day}`
+        newDayBtn.name = `${month}-${day}`
         newDayBtn.classList.add('dayBtn')
         newDayBtn.innerHTML = day
         daysContainer.appendChild(newDayBtn)
@@ -54,9 +54,10 @@ const renderBtnsStatus = (activeBtn) => {
 
 const returnNoOfDays = (btnName, cb) => {
     const btnMonth = btnName
-    const monthFromCalendarArray = calendar.find((month) => month[0].toLowerCase() == btnMonth)
+    const monthFromCalendarArray = calendar.find((month) => month[0] == btnMonth)
     let i = 1;
     do {
+        i < 10 ? i = `${0}${i}` : i
         cb(i, btnMonth)
         i++
     } while (i <= monthFromCalendarArray[1])
@@ -72,65 +73,70 @@ const findExistingData = async (date) => {
     })
     const data = await foundData.json()
     if (data.length > 0) {
-        //const {squats, bench, shoulder, deadlift} = data[0]
         renderTableRepData(data)
         return
     }
     return console.log('No existing data')
 }
 
-// const squatRepsInput = document.getElementById('squatReps')
-// const benchRepsInput = document.getElementById('benchReps')
-// const shoulderRepsInput = document.getElementById('shoulderReps')
-// const deadliftRepsInput = document.getElementById('deadliftReps')
-
-// const exerciseRepsArray = [squatRepsInput, benchRepsInput, shoulderRepsInput, deadliftRepsInput]
+const renderTableRepData = (data) => {
+    const {squats, bench, shoulder, deadlift} = data[0]
+    const exerciseKeys = Object.keys(data[0])
+    console.log(data[0])
+}
 
 
 //SAVE EXERCISE DATA - SEND TO JSON FILE
-class Exercises {
-    constructor(squatReps, benchReps, shoulderReps, deadliftReps, squatWeight, benchWeight, shoulderWeight, deadliftWeight) {
-        this.squatReps = squatReps,
-        this.benchReps = benchReps,
-        this.shoulderReps = shoulderReps,
-        this.deadliftReps = deadliftReps,
-        this.squatWeight = squatWeight,
-        this.benchWeight = benchWeight,
-        this.shoulderWeight = shoulderWeight,
-        this.deadliftWeight = deadliftWeight
+const squatRepInput = document.getElementById('squatReps')
+const squatWeightInput = document.getElementById('squatWeight')
+const benchRepInput = document.getElementById('benchReps')
+const benchWeightInput = document.getElementById('benchWeight')
+const shoulderRepInput = document.getElementById('shoulderReps')
+const shoulderWeightInput = document.getElementById('shoulderWeight')
+const deadliftRepInput = document.getElementById('deadliftReps')
+const deadliftWeightInput = document.getElementById('deadliftWeight')
+
+saveBtn.addEventListener('click', () => {
+    const saveSuccessMsg = document.getElementById('saveSuccessMsg')
+    const saveErrorMsg = document.getElementById('saveErrorMsg')
+    const isValidSave = checkInputsOnSave()
+    if (!isValidSave) {
+        saveSuccessMsg.style.display = 'none'
+        saveErrorMsg.style.display = 'block'
+        return console.log('Invalid save attempt')
     }
-    reps = () => {
-        const user = this
-        return{
-            squatReps: user.squatReps,
-            benchReps: user.benchReps,
-            shoulderReps: user.shoulderReps,
-            deadliftReps: user.deadliftReps
-        }
-    }
-    weight = () => {
-        const user = this
-        return({
-            squatWeight: user.squatWeight,
-            benchWeight: user.benchWeight,
-            shoulderWeight: user.shoulderWeight,
-            deadliftWeight: user.deadliftWeight
-        })
-    }
-    max = () => {
-        const user = this
-        return({
-            squatMax: user.squatReps * user.squatWeight,
-            benchMax: user.benchReps * user.benchWeight,
-            shoulderMax: user.shoulderReps * user.shoulderWeight,
-            deadliftMax: user.deadliftReps * user.deadliftWeight
-        })
-    }
+    saveErrorMsg.style.display = 'none'
+    saveSuccessMsg.style.display = 'block'
+    saveNewData()
+})
+
+const checkInputsOnSave = () => {
+    const emptyInputs = []
+
+    squatRepInput.value && !squatWeightInput.value 
+    || !squatRepInput.value && squatWeightInput.value 
+    ? emptyInputs.push({err: 'Error in squat input fields'})
+    : false
+
+    benchRepInput.value && !benchWeightInput.value 
+    || !benchRepInput.value && benchWeightInput.value 
+    ? emptyInputs.push({err: 'Error in bench input fields'})
+    : false
+
+    shoulderRepInput.value && !shoulderWeightInput.value 
+    || !shoulderRepInput.value && shoulderWeightInput.value 
+    ? emptyInputs.push({err: 'Error in shoulder input fields'})
+    : false
+
+    deadliftRepInput.value && !deadliftWeightInput.value 
+    || !deadliftRepInput.value && deadliftWeightInput.value 
+    ? emptyInputs.push({err: 'Error in deadlift input fields'})
+    : false
+
+    return emptyInputs.length > 0 ? false : true
 }
 
-saveBtn.addEventListener('click', async () => {
-    const {reps, weight, max} = new Exercises(500, 300)
-    renderRepMax(max)
+const saveNewData = () => {
     fetch(`http://localhost:3000/exercises`, {
         method: 'post',
         headers: {
@@ -140,37 +146,25 @@ saveBtn.addEventListener('click', async () => {
             dateBtn: activeDateBtn,
             id: Date.now(),
             squats: {
-                reps: reps().squatReps,
-                weight: weight().squatWeight,
-                maxRep: max().squatMax
+                reps: squatRepInput.value,
+                weight: squatWeightInput.value,
+                // maxRep: max().squatMax
             },
             bench: {
-                reps: reps().benchReps,
-                weight: weight().benchWeight,
-                maxRep: max().benchMax
+                reps: benchRepInput.value,
+                weight: benchWeightInput.value,
+                //maxRep: max().benchMax
             },
             shoulder: {
-                reps: reps().shoulderReps,
-                weight: weight().shoulderWeight,
-                maxRep: max().shoulderMax
+                reps: shoulderRepInput.value,
+                weight: shoulderWeightInput.value,
+                //maxRep: max().shoulderMax
             },
             deadlift: {
-                reps: reps().deadliftReps,
-                weight: weight().deadliftWeight,
-                maxRep: max().deadliftMax
+                reps: deadliftRepInput.value,
+                weight: deadliftWeightInput.value,
+                //maxRep: max().deadliftMax
             }
         })
     })
-})
-
-const squatMaxInput = document.getElementById('squatMax')
-const benchMaxInput = document.getElementById('benchMax')
-const shoulderMaxInput = document.getElementById('shoulderMax')
-const deadliftMaxInput = document.getElementById('deadliftMax')
-
-const renderRepMax = (calcMax) => {
-    squatMaxInput.value = calcMax().squatMax
-    benchMaxInput.value = calcMax().benchMax
-    shoulderMax.value = calcMax().shoulderMax
-    deadliftMaxInput.value = calcMax().deadliftMax
 }
