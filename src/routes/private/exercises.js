@@ -14,6 +14,24 @@ router.get('/', ensureAuth, (req, res, next) => {
     })
 })
 
+router.get('/retrieveExist', ensureAuth, async (req, res, next) => {
+    const userID = req.user.id
+    try {
+        fs.readFile(exerciseData, async (err, data) => {
+            if (err) {
+                return res.json({
+                    err: 'No data found'
+                })
+            }
+            const fileData = await JSON.parse(data)
+            const userData = await fileData.filter((item) => item.user == userID)
+            res.json(userData)
+        })
+    } catch (err) {
+        console.log(err)
+    }
+})
+
 router.get('/retrieve/:date', async (req, res, next) => {
     const userID = req.user.id
     const date = req.params.date

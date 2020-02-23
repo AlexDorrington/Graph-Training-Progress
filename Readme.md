@@ -14,5 +14,5 @@ Dashboard todo next:
  - Make form inputs required
 
 Exercises todo next:
- - Generate a 1 rep max value
- - render content to table if any exist
+ - Change css of button which has been clicked
+ 

@@ -11,6 +11,8 @@ const benchMaxInput = document.getElementById('benchMax')
 const shoulderMaxInput = document.getElementById('shoulderMax')
 const deadliftMaxInput = document.getElementById('deadliftMax')
 
+let activeDateBtn;
+
 const inputArray = [
     squatRepInput,
     squatWeightInput,
@@ -26,8 +28,6 @@ const inputArray = [
     deadliftMaxInput
 ]
 
-let activeDateBtn;
-
 const calendar = [
     ['0', 31],
     ['1', 28],
@@ -42,6 +42,25 @@ const calendar = [
     ['10', 30],
     ['11', 31]
 ]
+
+
+//RENDER VISUAL TO DAY BUTTONS WITH EXISTING DATA
+const showHaveExistingData = async () => {
+    const data = await fetch(`http://localhost:3000/exercises/retrieveExist`, {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    const jsonData = await data.json()
+    const dayBtns = Array.from(document.querySelectorAll('.dayBtn'))
+    for (let data of jsonData) {
+        dayBtns.filter((btn) => {
+            if (btn.name == data.dateBtn) {
+                btn.classList.add('existingDataBtn')
+            }
+        })
+    }
+}
 
 
 //RENDER DAYS PER MONTH BUTTONS IN DIV
@@ -70,6 +89,7 @@ monthBtnsDiv.addEventListener('click', ({target}) => {
             findExistingData(activeDateBtn)
         })
     })
+    showHaveExistingData()
 })
 
 const renderBtnsStatus = (activeBtn) => {
@@ -92,7 +112,7 @@ const returnNoOfDays = (btnName, cb) => {
 }
 
 
-//RETRIEVE EXISTING DATA IF EXISTS - Add btn name to search through json for match?
+//RETRIEVE AND RENDER EXISTING DATA IF EXISTS
 const findExistingData = async (date) => {
     const foundData = await fetch(`http://localhost:3000/exercises/retrieve/${date}`, {
         headers: {
@@ -139,15 +159,10 @@ const renderTableExistData = (data) => {
     shoulderWeightInput.value = shoulderWeight
     deadliftWeightInput.value = deadliftWeight
 
-    renderMax(data[0])
+    renderMax(squatReps, benchReps, shoulderReps, deadliftReps, squatWeight, benchWeight, shoulderWeight, deadliftWeight)
 }
 
-const renderMax = ({squats, bench, shoulder, deadlift}) => {
-    const {reps: squatReps, weight: squatWeight} = squats
-    const {reps: benchReps, weight: benchWeight} = bench
-    const {reps: shoulderReps, weight: shoulderWeight} = shoulder
-    const {reps: deadliftReps, weight: deadliftWeight} = deadlift
-
+const renderMax = (squatReps, benchReps, shoulderReps, deadliftReps, squatWeight, benchWeight, shoulderWeight, deadliftWeight) => {
     squatMaxInput.value = Math.round(parseInt(squatWeight) * (1 + (parseInt(squatReps) / 30)))
     benchMaxInput.value = Math.round(parseInt(benchWeight) * (1 + (parseInt(benchReps) / 30)))
     shoulderMaxInput.value = Math.round(parseInt(shoulderWeight) * (1 + (parseInt(shoulderReps) / 30)))

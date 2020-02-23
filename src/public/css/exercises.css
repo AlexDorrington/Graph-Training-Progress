@@ -114,3 +114,7 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
 .inactiveBtn {
     filter: brightness(50%);
 }
+.existingDataBtn {
+    color: #ff6600;
+    background-color: #343a40;
+}
