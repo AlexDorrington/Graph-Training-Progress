@@ -1,3 +1,31 @@
+const squatRepInput = document.getElementById('squatReps')
+const squatWeightInput = document.getElementById('squatWeight')
+const benchRepInput = document.getElementById('benchReps')
+const benchWeightInput = document.getElementById('benchWeight')
+const shoulderRepInput = document.getElementById('shoulderReps')
+const shoulderWeightInput = document.getElementById('shoulderWeight')
+const deadliftRepInput = document.getElementById('deadliftReps')
+const deadliftWeightInput = document.getElementById('deadliftWeight')
+const squatMaxInput = document.getElementById('squatMax')
+const benchMaxInput = document.getElementById('benchMax')
+const shoulderMaxInput = document.getElementById('shoulderMax')
+const deadliftMaxInput = document.getElementById('deadliftMax')
+
+const inputArray = [
+    squatRepInput,
+    squatWeightInput,
+    squatMaxInput,
+    benchRepInput,
+    benchWeightInput,
+    benchMaxInput,
+    shoulderRepInput,
+    shoulderWeightInput,
+    shoulderMaxInput,
+    deadliftRepInput,
+    deadliftWeightInput,
+    deadliftMaxInput
+]
+
 let activeDateBtn;
 
 const calendar = [
@@ -73,29 +101,61 @@ const findExistingData = async (date) => {
     })
     const data = await foundData.json()
     if (data.length > 0) {
-        renderTableRepData(data)
+        renderTableExistData(data)
         return
+    }
+    for (let item of inputArray) {
+        item.value = ''
     }
     return console.log('No existing data')
 }
 
-const renderTableRepData = (data) => {
-    const {squats, bench, shoulder, deadlift} = data[0]
-    const exerciseKeys = Object.keys(data[0])
-    console.log(data[0])
+const renderTableExistData = (data) => {
+    const {
+        squats : {
+            reps: squatReps, 
+            weight: squatWeight
+        },
+        bench : {
+            reps: benchReps, 
+            weight: benchWeight
+        },
+        shoulder : {
+            reps: shoulderReps,
+            weight: shoulderWeight
+        },
+        deadlift : {
+            reps: deadliftReps,
+            weight: deadliftWeight
+        }
+    } = data[0]
+
+    squatRepInput.value = squatReps
+    benchRepInput.value = benchReps
+    shoulderRepInput.value = shoulderReps
+    deadliftRepInput.value = deadliftReps
+    squatWeightInput.value = squatWeight
+    benchWeightInput.value = benchWeight
+    shoulderWeightInput.value = shoulderWeight
+    deadliftWeightInput.value = deadliftWeight
+
+    renderMax(data[0])
+}
+
+const renderMax = ({squats, bench, shoulder, deadlift}) => {
+    const {reps: squatReps, weight: squatWeight} = squats
+    const {reps: benchReps, weight: benchWeight} = bench
+    const {reps: shoulderReps, weight: shoulderWeight} = shoulder
+    const {reps: deadliftReps, weight: deadliftWeight} = deadlift
+
+    squatMaxInput.value = Math.round(parseInt(squatWeight) * (1 + (parseInt(squatReps) / 30)))
+    benchMaxInput.value = Math.round(parseInt(benchWeight) * (1 + (parseInt(benchReps) / 30)))
+    shoulderMaxInput.value = Math.round(parseInt(shoulderWeight) * (1 + (parseInt(shoulderReps) / 30)))
+    deadliftMaxInput.value = Math.round(parseInt(deadliftWeight) * (1 + (parseInt(deadliftReps) / 30)))
 }
 
 
 //SAVE EXERCISE DATA - SEND TO JSON FILE
-const squatRepInput = document.getElementById('squatReps')
-const squatWeightInput = document.getElementById('squatWeight')
-const benchRepInput = document.getElementById('benchReps')
-const benchWeightInput = document.getElementById('benchWeight')
-const shoulderRepInput = document.getElementById('shoulderReps')
-const shoulderWeightInput = document.getElementById('shoulderWeight')
-const deadliftRepInput = document.getElementById('deadliftReps')
-const deadliftWeightInput = document.getElementById('deadliftWeight')
-
 saveBtn.addEventListener('click', () => {
     const saveSuccessMsg = document.getElementById('saveSuccessMsg')
     const saveErrorMsg = document.getElementById('saveErrorMsg')
@@ -122,7 +182,7 @@ const checkInputsOnSave = () => {
     || !benchRepInput.value && benchWeightInput.value 
     ? emptyInputs.push({err: 'Error in bench input fields'})
     : false
-
+    
     shoulderRepInput.value && !shoulderWeightInput.value 
     || !shoulderRepInput.value && shoulderWeightInput.value 
     ? emptyInputs.push({err: 'Error in shoulder input fields'})
@@ -147,23 +207,19 @@ const saveNewData = () => {
             id: Date.now(),
             squats: {
                 reps: squatRepInput.value,
-                weight: squatWeightInput.value,
-                // maxRep: max().squatMax
+                weight: squatWeightInput.value
             },
             bench: {
                 reps: benchRepInput.value,
-                weight: benchWeightInput.value,
-                //maxRep: max().benchMax
+                weight: benchWeightInput.value
             },
             shoulder: {
                 reps: shoulderRepInput.value,
-                weight: shoulderWeightInput.value,
-                //maxRep: max().shoulderMax
+                weight: shoulderWeightInput.value
             },
             deadlift: {
                 reps: deadliftRepInput.value,
-                weight: deadliftWeightInput.value,
-                //maxRep: max().deadliftMax
+                weight: deadliftWeightInput.value
             }
         })
     })
