@@ -54,7 +54,7 @@ const showHaveExistingData = async () => {
     const jsonData = await data.json()
     const dayBtns = Array.from(document.querySelectorAll('.dayBtn'))
     for (let data of jsonData) {
-        dayBtns.filter((btn) => {
+        dayBtns.forEach((btn) => {
             if (btn.name == data.dateBtn) {
                 btn.classList.add('existingDataBtn')
             }
@@ -84,8 +84,10 @@ monthBtnsDiv.addEventListener('click', ({target}) => {
         newDayBtn.innerHTML = day
         daysContainer.appendChild(newDayBtn)
         newDayBtn.addEventListener('click', (e) => {
+            const {target: {name}} = e
             daysDataContainer.style.display = 'block'
-            activeDateBtn = e.target.name
+            activeDateBtn = name
+            styleActiveBtn(name)
             findExistingData(activeDateBtn)
         })
     })
@@ -109,6 +111,15 @@ const returnNoOfDays = (btnName, cb) => {
         cb(i, btnMonth)
         i++
     } while (i <= monthFromCalendarArray[1])
+}
+
+const styleActiveBtn = (activeBtn) => {
+    const monthBtns = Array.from(document.querySelectorAll('.dayBtn'))
+    for (let btn of monthBtns) {
+        btn.name == activeBtn
+        ?btn.classList.add('clickedDayBtn')
+        :btn.classList.remove('clickedDayBtn')
+    }
 }
 
 

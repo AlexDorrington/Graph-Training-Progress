@@ -118,3 +118,6 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
     color: #ff6600;
     background-color: #343a40;
 }
+.clickedDayBtn {
+    background-color: #ffffff;
+}
