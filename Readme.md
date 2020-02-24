@@ -14,5 +14,6 @@ Dashboard todo next:
  - Make form inputs required
 
 Exercises todo next:
- - Continue working on delete feature - finish backend
+ - Alter original if save over existing data
+ - chart.js
  

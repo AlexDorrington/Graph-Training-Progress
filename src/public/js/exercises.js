@@ -69,6 +69,8 @@ const daysContainer = document.getElementById('daysContainer')
 const daysDataContainer = document.getElementById('daysDataContainer')
 
 monthBtnsDiv.addEventListener('click', ({target}) => {
+    saveSuccessMsg.style.display = 'none'
+    saveErrorMsg.style.display = 'none'
     const btnMonthName = target
     daysContainer.innerHTML = ''
     if (btnMonthName.classList.contains('activeMonth')) {
@@ -85,6 +87,8 @@ monthBtnsDiv.addEventListener('click', ({target}) => {
         daysContainer.appendChild(newDayBtn)
         newDayBtn.addEventListener('click', (e) => {
             const {target: {name}} = e
+            saveSuccessMsg.style.display = 'none'
+            saveErrorMsg.style.display = 'none'
             daysDataContainer.style.display = 'block'
             activeDateBtn = name
             styleActiveBtn(name)
