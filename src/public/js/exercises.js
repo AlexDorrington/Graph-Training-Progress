@@ -222,8 +222,8 @@ const checkInputsOnSave = () => {
     return emptyInputs.length > 0 ? false : true
 }
 
-const saveNewData = () => {
-    fetch(`http://localhost:3000/exercises`, {
+const saveNewData = async () => {
+    const dataSaved = await fetch(`http://localhost:3000/exercises`, {
         method: 'post',
         headers: {
             'Content-Type': 'application/json'
@@ -249,4 +249,26 @@ const saveNewData = () => {
             }
         })
     })
+    const jsonData = await dataSaved.json()
+    const dataItem = jsonData[jsonData.length - 1]
+    const btnToAmend = Array.from(document.querySelectorAll('.dayBtn')).find((item) => item.name == dataItem.dateBtn)
+    btnToAmend.classList.add('existingDataBtn')
 }
+
+
+//DELETE DATA FOR PARTICULAR DATE
+deleteBtn.addEventListener('click', async (e) => {
+    if (!confirm('Would you like to delete the data associated for this day?')) {
+        return
+    }
+    const dataToDelete = await fetch(`http://localhost:3000/exercises/remove/${activeDateBtn}`, {
+        method: 'delete',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    const deleteData = await dataToDelete.json()
+    const btnToAmend = Array.from(document.querySelectorAll('.dayBtn')).find((item) => item.name == deleteData[0].dateBtn)
+    btnToAmend.classList.remove('existingDataBtn')
+    findExistingData()
+})

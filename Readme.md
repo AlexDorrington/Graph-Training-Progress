@@ -14,5 +14,5 @@ Dashboard todo next:
  - Make form inputs required
 
 Exercises todo next:
- - Change css of button which has been clicked
+ - Continue working on delete feature - finish backend
  
