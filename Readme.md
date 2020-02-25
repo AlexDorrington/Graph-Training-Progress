@@ -14,6 +14,5 @@ Dashboard todo next:
  - Make form inputs required
 
 Exercises todo next:
- - Hide table when click new month
- - chart.js
+ - Add chart.js and plot rep maxes to graph
  

@@ -53,6 +53,7 @@ const daysDataContainer = document.getElementById('daysDataContainer')
 monthBtnsDiv.addEventListener('click', ({target}) => {
     saveSuccessMsg.style.display = 'none'
     saveErrorMsg.style.display = 'none'
+    daysDataContainer.style.display = 'none'
     const btnMonthName = target
     daysContainer.innerHTML = ''
     if (btnMonthName.classList.contains('activeMonth')) {
