@@ -14,6 +14,6 @@ Dashboard todo next:
  - Make form inputs required
 
 Exercises todo next:
- - Alter original if save over existing data
+ - Hide table when click new month
  - chart.js
  

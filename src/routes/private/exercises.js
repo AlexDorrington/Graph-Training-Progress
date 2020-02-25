@@ -69,7 +69,15 @@ router.post('/', ensureAuth, async (req, res, next) => {
                 return res.json(newExerciseData)
             }
             const fileData = await JSON.parse(data)
-            fileData.push(newExerciseData)
+            const exerciseDataDate = newExerciseData.dateBtn
+            const findExist = fileData.findIndex((item) => {
+                return item.dateBtn == exerciseDataDate
+            })
+            if (findExist >= 0) {
+                await fileData.splice(findExist, 1, newExerciseData)
+            } else {
+                fileData.push(newExerciseData)
+            }
             fs.writeFile(exerciseData, JSON.stringify(fileData), () => {
                 console.log('New exercise data added')
             })

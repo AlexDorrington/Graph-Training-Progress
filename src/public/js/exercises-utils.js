@@ -23,3 +23,22 @@ const changeBtnVisual = () => {
         btn.classList.toggle('inactiveBtn')
     }
 }
+
+
+//RENDER VISUAL TO DAY BUTTONS WITH EXISTING DATA
+const showHaveExistingData = async () => {
+    const data = await fetch(`http://localhost:3000/exercises/retrieveExist`, {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    const jsonData = await data.json()
+    const dayBtns = Array.from(document.querySelectorAll('.dayBtn'))
+    for (let data of jsonData) {
+        dayBtns.forEach((btn) => {
+            if (btn.name == data.dateBtn) {
+                btn.classList.add('existingDataBtn')
+            }
+        })
+    }
+}
