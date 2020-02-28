@@ -51,13 +51,7 @@ const benchChartBtn = document.getElementById('benchChartBtn')
 const shoulderChartBtn = document.getElementById('shoulderChartBtn')
 const deadliftChartBtn = document.getElementById('deadliftChartBtn')
 
-const displaySquatChart = document.getElementById('displaySquatChart')
-const displayBenchChart = document.getElementById('displayBenchChart')
-const displayShoulderChart = document.getElementById('displayShoulderChart')
-const displayDeadliftChart = document.getElementById('displayDeadliftChart')
-
 const chartBtns = [squatChartBtn, benchChartBtn, shoulderChartBtn, deadliftChartBtn]
-const charts = [displaySquatChart, displayBenchChart, displayShoulderChart, displayDeadliftChart]
 
 chartBtns.forEach((btn) => {
     let targetBtn;
@@ -80,11 +74,11 @@ chartBtns.forEach((btn) => {
             if (i === targetBtn) {
                 chartBtns[i].classList.remove('inactiveChartBtn')
                 chartBtns[i].classList.add('activeChartBtn')
-                charts[i].style.display = 'block'
+                chartSelection = chartBtns[i].getAttribute('data-chart-type')
+                renderExerciseChart()
             } else {
                 chartBtns[i].classList.remove('activeChartBtn')
                 chartBtns[i].classList.add('inactiveChartBtn')
-                charts[i].style.display = 'none'
             }
         }
     })

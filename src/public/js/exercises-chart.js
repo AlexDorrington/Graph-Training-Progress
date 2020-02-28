@@ -1,23 +1,22 @@
-const chartCanvasSquats = document.getElementById('squatChart').getContext('2d');
-const chartCanvasBench = document.getElementById('benchChart').getContext('2d');
-const chartCanvasShoulder = document.getElementById('shoulderChart').getContext('2d');
-const chartCanvasDeadlift = document.getElementById('deadliftChart').getContext('2d');
+const chartCanvas = document.getElementById('exerciseChart').getContext('2d');
 
-const renderSquatChart = async () => {
+let chartSelection = 'squat';
+
+const renderExerciseChart = async () => {
     const data = await fetch(`http://localhost:3000/exercises/retrieveExist`, {
         headers: {
             'Content-Type': 'application/json'
         }
     })
     const exerciseData = await data.json()
-    const {squat, dates} = await issueChartData(exerciseData)
+    const exercises = await issueChartData(exerciseData)
 
-    new Chart(chartCanvasSquats, {
+    new Chart(chartCanvas, {
         type: 'scatter',
         data: {
             datasets: [{
                 label: 'Rep to Weight ratio throughout the year',
-                data: squat,
+                data: exercises[chartSelection],
                 borderColor: '#ff6600',
                 borderWidth: 2
             }]
@@ -42,126 +41,7 @@ const renderSquatChart = async () => {
         }
     });
 }
-
-const renderBenchChart = async () => {
-    const data = await fetch(`http://localhost:3000/exercises/retrieveExist`, {
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    })
-    const exerciseData = await data.json()
-    const {bench, dates} = await issueChartData(exerciseData)
-
-    new Chart(chartCanvasBench, {
-        type: 'scatter',
-        data: {
-            datasets: [{
-                label: 'Rep to Weight ratio throughout the year',
-                data: bench,
-                borderColor: '#ff6600',
-                borderWidth: 2
-            }]
-        },
-        options: {
-            scales: {
-                xAxes: [{
-                    type: 'linear',
-                    position: 'bottom',
-                    scaleLabel: {
-                        display: true,
-                        labelString: 'Weight'
-                    }
-                }],
-                yAxes: [{
-                    scaleLabel: {
-                      display: true,
-                      labelString: 'Reps'
-                    }
-                }]
-            }
-        }
-    });
-}
-
-const renderShoulderChart = async () => {
-    const data = await fetch(`http://localhost:3000/exercises/retrieveExist`, {
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    })
-    const exerciseData = await data.json()
-    const {shoulder, dates} = await issueChartData(exerciseData)
-
-    new Chart(chartCanvasShoulder, {
-        type: 'scatter',
-        data: {
-            datasets: [{
-                label: 'Rep to Weight ratio throughout the year',
-                data: shoulder,
-                borderColor: '#ff6600',
-                borderWidth: 2
-            }]
-        },
-        options: {
-            scales: {
-                xAxes: [{
-                    type: 'linear',
-                    position: 'bottom',
-                    scaleLabel: {
-                        display: true,
-                        labelString: 'Weight'
-                    }
-                }],
-                yAxes: [{
-                    scaleLabel: {
-                      display: true,
-                      labelString: 'Reps'
-                    }
-                }]
-            }
-        }
-    });
-}
-
-const renderDeadliftChart = async () => {
-    const data = await fetch(`http://localhost:3000/exercises/retrieveExist`, {
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    })
-    const exerciseData = await data.json()
-    const {deadlift, dates} = await issueChartData(exerciseData)
-
-    new Chart(chartCanvasDeadlift, {
-        type: 'scatter',
-        data: {
-            datasets: [{
-                label: 'Rep to Weight ratio throughout the year',
-                data: deadlift,
-                borderColor: '#ff6600',
-                borderWidth: 2
-            }]
-        },
-        options: {
-            scales: {
-                xAxes: [{
-                    type: 'linear',
-                    position: 'bottom',
-                    scaleLabel: {
-                        display: true,
-                        labelString: 'Weight'
-                    }
-                }],
-                yAxes: [{
-                    scaleLabel: {
-                      display: true,
-                      labelString: 'Reps'
-                    }
-                }]
-            }
-        }
-    });
-}
+   
 
 const issueChartData = async (dataset) => {
     const dataRecords = await dataset.map((data) => {
@@ -212,10 +92,4 @@ const issueChartData = async (dataset) => {
     }
 }
 
-const renderCharts = () => {
-    renderSquatChart()
-    renderBenchChart()
-    renderShoulderChart()
-    renderDeadliftChart()
-}
-renderCharts()
+renderExerciseChart()

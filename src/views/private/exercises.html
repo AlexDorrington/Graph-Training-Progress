@@ -74,23 +74,14 @@
         </div>
     </div>
         <div class="container-fluid mx-auto graphContainer">
-            <button class="btn activeChartBtn" id="squatChartBtn">Squats</button>
-            <button class="btn inactiveChartBtn" id="benchChartBtn">Bench</button>
-            <button class="btn inactiveChartBtn" id="shoulderChartBtn">Shoulder</button>
-            <button class="btn inactiveChartBtn" id="deadliftChartBtn">Deadlift</button>
+            <button class="btn activeChartBtn" id="squatChartBtn" data-chart-type="squat">Squats</button>
+            <button class="btn inactiveChartBtn" id="benchChartBtn" data-chart-type="bench">Bench</button>
+            <button class="btn inactiveChartBtn" id="shoulderChartBtn" data-chart-type="shoulder">Shoulder</button>
+            <button class="btn inactiveChartBtn" id="deadliftChartBtn" data-chart-type="deadlift">Deadlift</button>
         </div>
         <div class="container-fluid mx-auto graphContainer">
-            <div id="displaySquatChart">
-                <canvas id="squatChart" width="1800" height="500" class="bg-dark"></canvas>
-            </div>
-            <div id="displayBenchChart">
-                <canvas id="benchChart" width="1800" height="500" class="bg-dark"></canvas>
-            </div>
-            <div id="displayShoulderChart">
-                <canvas id="shoulderChart" width="1800" height="500" class="bg-dark"></canvas>
-            </div>
-            <div id="displayDeadliftChart">
-                <canvas id="deadliftChart" width="1800" height="500" class="bg-dark"></canvas>
+            <div id="displayExerciseChart">
+                <canvas id="exerciseChart" width="1800" height="500" class="bg-dark"></canvas>
             </div>
         </div>
 

@@ -14,6 +14,6 @@ Dashboard todo next:
  - Make form inputs required
 
 Exercises todo next:
- - Tidy JS for chart aspect
  - Add date to chart plot point
+ - Tidy markup
  
