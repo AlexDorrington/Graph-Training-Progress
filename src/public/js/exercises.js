@@ -119,8 +119,7 @@ const findExistingData = async (date) => {
     })
     const data = await foundData.json()
     if (data.length > 0) {
-        renderTableExistData(data)
-        return
+        return renderTableExistData(data)
     }
     for (let item of inputArray) {
         item.value = ''

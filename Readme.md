@@ -14,5 +14,6 @@ Dashboard todo next:
  - Make form inputs required
 
 Exercises todo next:
- - Add chart.js and plot rep maxes to graph
+ - Tidy JS for chart aspect
+ - Add date to chart plot point
  
