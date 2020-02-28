@@ -218,3 +218,4 @@ const renderCharts = () => {
     renderShoulderChart()
     renderDeadliftChart()
 }
+renderCharts()
