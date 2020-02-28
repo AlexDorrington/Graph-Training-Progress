@@ -59,55 +59,33 @@ const displayDeadliftChart = document.getElementById('displayDeadliftChart')
 const chartBtns = [squatChartBtn, benchChartBtn, shoulderChartBtn, deadliftChartBtn]
 const charts = [displaySquatChart, displayBenchChart, displayShoulderChart, displayDeadliftChart]
 
-chartBtns[0].addEventListener('click', () => {
-    for (let i = 0; i < chartBtns.length; i++) {
-        if (i === 0) {
-            chartBtns[i].classList.remove('inactiveChartBtn')
-            chartBtns[i].classList.add('activeChartBtn')
-            charts[i].style.display = 'block'
-        } else {
-            chartBtns[i].classList.remove('activeChartBtn')
-            chartBtns[i].classList.add('inactiveChartBtn')
-            charts[i].style.display = 'none'
+chartBtns.forEach((btn) => {
+    let targetBtn;
+    btn.addEventListener('click', (e) => {
+        switch (e.target.id) {
+            case 'squatChartBtn':
+                targetBtn = 0;
+                break;
+            case 'benchChartBtn':
+                targetBtn = 1;
+                break;
+            case 'shoulderChartBtn':
+                targetBtn = 2;
+                break;
+            case 'deadliftChartBtn':
+                targetBtn = 3;
+                break;
         }
-    }
-})
-chartBtns[1].addEventListener('click', () => {
-    for (let i = 0; i < chartBtns.length; i++) {
-        if (i === 1) {
-            chartBtns[i].classList.remove('inactiveChartBtn')
-            chartBtns[i].classList.add('activeChartBtn')
-            charts[i].style.display = 'block'
-        } else {
-            chartBtns[i].classList.remove('activeChartBtn')
-            chartBtns[i].classList.add('inactiveChartBtn')
-            charts[i].style.display = 'none'
+        for (let i = 0; i < chartBtns.length; i++) {
+            if (i === targetBtn) {
+                chartBtns[i].classList.remove('inactiveChartBtn')
+                chartBtns[i].classList.add('activeChartBtn')
+                charts[i].style.display = 'block'
+            } else {
+                chartBtns[i].classList.remove('activeChartBtn')
+                chartBtns[i].classList.add('inactiveChartBtn')
+                charts[i].style.display = 'none'
+            }
         }
-    }
-})
-chartBtns[2].addEventListener('click', () => {
-    for (let i = 0; i < chartBtns.length; i++) {
-        if (i === 2) {
-            chartBtns[i].classList.remove('inactiveChartBtn')
-            chartBtns[i].classList.add('activeChartBtn')
-            charts[i].style.display = 'block'
-        } else {
-            chartBtns[i].classList.remove('activeChartBtn')
-            chartBtns[i].classList.add('inactiveChartBtn')
-            charts[i].style.display = 'none'
-        }
-    }
-})
-chartBtns[3].addEventListener('click', () => {
-    for (let i = 0; i < chartBtns.length; i++) {
-        if (i === 3) {
-            chartBtns[i].classList.remove('inactiveChartBtn')
-            chartBtns[i].classList.add('activeChartBtn')
-            charts[i].style.display = 'block'
-        } else {
-            chartBtns[i].classList.remove('activeChartBtn')
-            chartBtns[i].classList.add('inactiveChartBtn')
-            charts[i].style.display = 'none'
-        }
-    }
+    })
 })

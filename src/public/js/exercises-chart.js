@@ -10,7 +10,7 @@ const renderSquatChart = async () => {
         }
     })
     const exerciseData = await data.json()
-    const {squat, bench, shoulder, deadlift, dates} = await issueChartData(exerciseData)
+    const {squat, dates} = await issueChartData(exerciseData)
 
     new Chart(chartCanvasSquats, {
         type: 'scatter',
@@ -50,7 +50,7 @@ const renderBenchChart = async () => {
         }
     })
     const exerciseData = await data.json()
-    const {squat, bench, shoulder, deadlift, dates} = await issueChartData(exerciseData)
+    const {bench, dates} = await issueChartData(exerciseData)
 
     new Chart(chartCanvasBench, {
         type: 'scatter',
@@ -90,7 +90,7 @@ const renderShoulderChart = async () => {
         }
     })
     const exerciseData = await data.json()
-    const {squat, bench, shoulder, deadlift, dates} = await issueChartData(exerciseData)
+    const {shoulder, dates} = await issueChartData(exerciseData)
 
     new Chart(chartCanvasShoulder, {
         type: 'scatter',
@@ -130,7 +130,7 @@ const renderDeadliftChart = async () => {
         }
     })
     const exerciseData = await data.json()
-    const {squat, bench, shoulder, deadlift, dates} = await issueChartData(exerciseData)
+    const {deadlift, dates} = await issueChartData(exerciseData)
 
     new Chart(chartCanvasDeadlift, {
         type: 'scatter',
