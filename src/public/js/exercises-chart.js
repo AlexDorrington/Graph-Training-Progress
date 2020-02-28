@@ -212,7 +212,9 @@ const issueChartData = async (dataset) => {
     }
 }
 
-renderSquatChart()
-renderBenchChart()
-renderShoulderChart()
-renderDeadliftChart()
+const renderCharts = () => {
+    renderSquatChart()
+    renderBenchChart()
+    renderShoulderChart()
+    renderDeadliftChart()
+}

@@ -180,10 +180,7 @@ saveBtn.addEventListener('click', () => {
     saveErrorMsg.style.display = 'none'
     saveSuccessMsg.style.display = 'block'
     saveNewData()
-    renderSquatChart()
-    renderBenchChart()
-    renderShoulderChart()
-    renderDeadliftChart()
+    renderCharts()
 })
 
 const checkInputsOnSave = () => {
@@ -261,8 +258,5 @@ deleteBtn.addEventListener('click', async (e) => {
     const btnToAmend = Array.from(document.querySelectorAll('.dayBtn')).find((item) => item.name == deleteData[0].dateBtn)
     btnToAmend.classList.remove('existingDataBtn')
     findExistingData()
-    renderSquatChart()
-    renderBenchChart()
-    renderShoulderChart()
-    renderDeadliftChart()
+    renderCharts()
 })
