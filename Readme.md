@@ -16,5 +16,5 @@ Dashboard todo next:
 Exercises todo next:
  - Add date to chart plot point
  
- - AMEND PASSPORT LOGIN AUTH SO CAN HOST ON HEROKU
+ *AMEND PASSPORT LOGIN AUTH SO CAN HOST ON HEROKU
  
